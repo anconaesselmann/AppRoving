@@ -1,0 +1,68 @@
+Copyright (c) 2023 Axel Ancona Esselmann <axel@anconaesselmann.com>
+
+XcodeDebug License Agreement
+
+IMPORTANT: READ CAREFULLY BEFORE USING THE XcodeDebug SOFTWARE PACKAGE.
+
+This License Agreement ("Agreement") is a legal agreement between you 
+(either an individual or an entity) and [Your Company Name]
+("Licensor") for the software package known as XcodeDebug
+("Software"). By using, downloading, or installing the Software, you 
+agree to be bound by the terms and conditions of this Agreement. If
+you do not agree to the terms of this Agreement, do not use the
+Software.
+
+1. GRANT OF LICENSE.
+
+Subject to the terms and conditions of this Agreement, Licensor grants
+you a non-exclusive, non-transferable, limited license to use,
+reproduce, and distribute the XcodeDebug package solely for the
+purpose of integrating it into your own software projects.
+
+2. RESTRICTIONS.
+
+You may not:
+
+   a. Modify, adapt, alter, translate, or create derivative works of 
+      the Software.
+   b. Reverse engineer, decompile, disassemble, or otherwise attempt
+      to derive the source code of the Software.
+   c. Remove, alter, or obscure any proprietary notices or labels on
+      the Software.
+
+3. XCODEDEBUG LICENSE REQUIREMENT.
+
+The use of the XcodeDebug package is contingent upon having a valid
+and separate license for the software XcodeDebugger. You must ensure
+that you have a valid license for XcodeDebugger before using or
+distributing the XcodeDebug package.
+
+4. SUPPORT AND UPDATES.
+
+This Agreement does not entitle you to any support, maintenance, or
+updates for the Software.
+
+5. DISCLAIMER OF WARRANTY.
+
+THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+6. TERMINATION.
+
+This Agreement is effective until terminated. Your rights under this
+Agreement will terminate automatically without notice if you fail to
+comply with any term(s) of this Agreement.
+
+7. MISCELLANEOUS.
+
+This Agreement constitutes the entire agreement between the parties
+concerning the subject matter hereof and supersedes all prior and
+contemporaneous agreements and understandings, whether oral or
+written. This Agreement may be amended only in writing and signed by
+both parties.
