@@ -17,11 +17,12 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/anconaesselmann/FileUrlExtensions", from: "0.0.2"),
+        .package(url: "https://github.com/anconaesselmann/YetAnotherLogger", from: "0.0.1"),
     ],
     targets: [
         .target(
             name: "XcodeDebug",
-            dependencies: ["FileUrlExtensions"]
+            dependencies: ["FileUrlExtensions", "YetAnotherLogger"]
         ),
     ]
 )
