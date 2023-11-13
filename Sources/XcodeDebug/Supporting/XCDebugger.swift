@@ -50,7 +50,7 @@ final public class XCDebugger: ObservableObject {
                 }
                 customSettings[Settings.key] = settings
             } catch {
-                print(error)
+                log(error)
             }
         }
         guard status.isEnabled(Settings.key) else {

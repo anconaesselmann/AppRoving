@@ -6,10 +6,10 @@ import Combine
 
 public extension XCDebugger {
     static func start(_ onChange: (() -> Void)? = nil, onLog: (((Result<String, Error>)) -> Void)? = nil) throws {
-        onChange?()
-        try XCDebugger.shared.startMonitoring()
-        shared.onChange = onChange
         shared.onLog = onLog
+        onChange?()
+        try shared.startMonitoring()
+        shared.onChange = onChange
     }
 
     static func stop() {
