@@ -2,7 +2,6 @@
 //
 
 import Foundation
-import FileUrlExtensions
 
 public struct XCDebugStatus: Codable {
 
@@ -13,11 +12,11 @@ public struct XCDebugStatus: Codable {
     private var disabled: Set<String>
 
     public func updated(with data: Data) throws -> Self {
-        return try DefaultEncoders.decoder.decode(Self.self, from: data)
+        return try DefaultCoders.decoder.decode(Self.self, from: data)
     }
 
     public func data() throws -> Data {
-        try DefaultEncoders.encoder.encode(self)
+        try DefaultCoders.encoder.encode(self)
     }
 
     public func isEnabled(_ key: String) -> Bool {

@@ -4,38 +4,35 @@
 import Foundation
 import Combine
 
-public func XCDebugStart(_ onChange: @escaping () -> Void) throws {
-    onChange()
-    try XCDebugger.shared.startMonitoring()
-    XCDebugger.shared.onChange = onChange
-}
-
-public func XCDebugStop() {
-    XCDebugger.shared.stopMonitoring()
-}
-
-public func XCDebug<Settings, Value>(_ keyPath: KeyPath<Settings, Value>) -> Value
-        where Settings: DebugSettings, Value: XCDebugValueCompatible
-{
-    XCDebugger.shared.get(keyPath)
-}
-
-public func XCDebug<Settings, Value>(_ keyPath: KeyPath<Settings, Value?>) -> Value?
-    where Settings: DebugSettings, Value: XCDebugValueCompatible
-{
-    XCDebugger.shared.get(keyPath)
-}
-
 public extension XCDebugger {
-    static var change: ObservableObjectPublisher {
-        XCDebugger.shared.objectWillChange
+    static func start(_ onChange: (() -> Void)? = nil, onLog: (((Result<String, Error>)) -> Void)? = nil) throws {
+        onChange?()
+        try XCDebugger.shared.startMonitoring()
+        shared.onChange = onChange
+        shared.onLog = onLog
     }
-}
 
-public var XCDebugChanges: ObservableObjectPublisher {
-    XCDebugger.shared.objectWillChange
-}
+    static func stop() {
+        shared.stopMonitoring()
+    }
 
-public func onXCDebugChange(_ onChange: @escaping () -> Void) -> AnyCancellable {
-    XCDebugger.shared.objectWillChange.sink(receiveValue: onChange)
+    static func get<Settings>(_ keyPath: KeyPath<Settings, Bool>) -> Bool
+        where Settings: DebugSettings
+    {
+        shared.get(keyPath)
+    }
+
+    static func get<Settings, Value>(_ keyPath: KeyPath<Settings, Value?>) -> Value?
+        where Settings: DebugSettings, Value: XCDebugValueCompatible
+    {
+        shared.get(keyPath)
+    }
+
+    static var changed: ObservableObjectPublisher {
+        shared.objectWillChange
+    }
+
+    static func onChange(_ onChange: @escaping () -> Void) -> AnyCancellable {
+        shared.objectWillChange.sink(receiveValue: onChange)
+    }
 }

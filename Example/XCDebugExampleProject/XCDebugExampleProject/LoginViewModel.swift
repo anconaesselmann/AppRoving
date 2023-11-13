@@ -3,7 +3,6 @@
 
 import Foundation
 import Combine
-import XcodeDebug
 
 @MainActor
 class LoginViewModel: ObservableObject {
@@ -11,12 +10,14 @@ class LoginViewModel: ObservableObject {
     private var bag = Set<AnyCancellable>()
 
     init() {
-        onXCDebugChange {
+#if DEBUG
+        XCDebug.onChange {
             self.objectWillChange.send()
         }.store(in: &bag)
+#endif
     }
 
     var name: String {
-        XCDebug(\LoginDebug.caption) ?? "NA"
+        XCDebug.get(\LoginDebug.caption) ?? "NA"
     }
 }

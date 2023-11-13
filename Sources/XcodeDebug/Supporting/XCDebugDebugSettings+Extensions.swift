@@ -2,7 +2,6 @@
 //
 
 import Foundation
-import FileUrlExtensions
 
 public extension DebugSettings {
     static var fileName: String {
@@ -14,11 +13,11 @@ public extension DebugSettings {
     }
 
     func updated(with data: Data) throws -> Self {
-        try DefaultEncoders.decoder.decode(Self.self, from: data)
+        try DefaultCoders.decoder.decode(Self.self, from: data)
     }
 
     func data() throws -> Data {
-        let data = try DefaultEncoders.encoder.encode(self)
+        let data = try DefaultCoders.encoder.encode(self)
         let jsonData = try JSONSerialization.jsonObject(with: data)
         guard var dict = jsonData as? [String: Any] else {
             throw CustomSettingsError.notAValidDictionary

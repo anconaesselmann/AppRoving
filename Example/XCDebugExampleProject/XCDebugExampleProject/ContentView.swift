@@ -2,19 +2,20 @@
 //
 
 import SwiftUI
-import XcodeDebug
 
 struct ContentView: View {
 
+#if DEBUG
     @StateObject
-    var debugger = XCDebugger.shared
+    var debugger = XCDebug.shared
+#endif
 
     @StateObject
     var vm = LoginViewModel()
 
     var body: some View {
         VStack {
-            if XCDebug(\LoginDebug.debugging) {
+            if XCDebug.get(\LoginDebug.debugging) {
                 Text("Debugging")
             }
             Text("Hello, world!")
