@@ -25,7 +25,7 @@ final public class XCDebugger: ObservableObject, Logging {
 
     private var monitoring: Bool = false
 
-    private var status: Status = Status()
+    private var status: XCDebugStatus = XCDebugStatus()
 
     public func get<Settings, Value>(_ keyPath: KeyPath<Settings, Value>) -> Value
         where Settings: DebugSettings

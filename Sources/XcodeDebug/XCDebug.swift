@@ -39,27 +39,3 @@ public var XCDebugChanges: ObservableObjectPublisher {
 public func onXCDebugChange(_ onChange: @escaping () -> Void) -> AnyCancellable {
     XCDebugger.shared.objectWillChange.sink(receiveValue: onChange)
 }
-
-
-import FileUrlExtensions
-
-struct Status: Codable {
-
-    init() {
-        self.enabled = Set<String>()
-    }
-
-    var enabled: Set<String>
-
-    func updated(with data: Data) throws -> Self {
-        return try DefaultEncoders.decoder.decode(Self.self, from: data)
-    }
-
-    func data() throws -> Data {
-        try DefaultEncoders.encoder.encode(self)
-    }
-
-    func isEnabled(_ key: String) -> Bool {
-        enabled.contains(key)
-    }
-}

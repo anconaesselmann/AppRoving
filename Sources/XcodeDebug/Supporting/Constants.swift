@@ -4,7 +4,7 @@
 import Foundation
 
 public struct XCDebugConstants {
-    static let displayName = "xcode_debug_display_name"
-    static let key = "xcode_debug_key"
-    static let jsonFileExtensions = ".json"
+    public static let displayName = "xcode_debug_display_name"
+    public static let key = "xcode_debug_key"
+    public static let jsonFileExtensions = ".json"
 }
