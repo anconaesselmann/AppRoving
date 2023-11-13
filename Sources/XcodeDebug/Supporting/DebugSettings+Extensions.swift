@@ -1,17 +1,12 @@
-//  Created by Axel Ancona Esselmann on 11/10/23.
+//  Created by Axel Ancona Esselmann on 11/12/23.
 //
 
 import Foundation
 import FileUrlExtensions
 
-public protocol CustomDebugSettings: Codable {
-    static var name: String { get }
-    init()
-}
-
-public extension CustomDebugSettings {
+public extension DebugSettings {
     static var fileName: String {
-        key + Constants.jsonFileExtensions
+        key + XCDebugConstants.jsonFileExtensions
     }
 
     static var key: String {
@@ -28,8 +23,8 @@ public extension CustomDebugSettings {
         guard var dict = jsonData as? [String: Any] else {
             throw CustomSettingsError.notAValidDictionary
         }
-        dict[Constants.displayName] = Self.name
-        dict[Constants.key] = Self.key
+        dict[XCDebugConstants.displayName] = Self.name
+        dict[XCDebugConstants.key] = Self.key
         return try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
     }
 }

@@ -12,6 +12,8 @@
 		974CB6B72B004E090006D359 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 974CB6B62B004E090006D359 /* Assets.xcassets */; };
 		974CB6BB2B004E090006D359 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 974CB6BA2B004E090006D359 /* Preview Assets.xcassets */; };
 		974CB6C32B004E610006D359 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 974CB6C22B004E610006D359 /* XcodeDebug */; };
+		974CB6FA2B01A3730006D359 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CB6F92B01A3730006D359 /* LoginViewModel.swift */; };
+		974CB6FD2B01AC250006D359 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 974CB6FC2B01AC250006D359 /* XcodeDebug */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,7 @@
 		974CB6B62B004E090006D359 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		974CB6B82B004E090006D359 /* XCDebugExampleProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XCDebugExampleProject.entitlements; sourceTree = "<group>"; };
 		974CB6BA2B004E090006D359 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		974CB6F92B01A3730006D359 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				974CB6FD2B01AC250006D359 /* XcodeDebug in Frameworks */,
 				974CB6C32B004E610006D359 /* XcodeDebug in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -56,6 +60,7 @@
 			children = (
 				974CB6B22B004E070006D359 /* XCDebugExampleProjectApp.swift */,
 				974CB6B42B004E070006D359 /* ContentView.swift */,
+				974CB6F92B01A3730006D359 /* LoginViewModel.swift */,
 				974CB6B62B004E090006D359 /* Assets.xcassets */,
 				974CB6B82B004E090006D359 /* XCDebugExampleProject.entitlements */,
 				974CB6B92B004E090006D359 /* Preview Content */,
@@ -89,6 +94,7 @@
 			name = XCDebugExampleProject;
 			packageProductDependencies = (
 				974CB6C22B004E610006D359 /* XcodeDebug */,
+				974CB6FC2B01AC250006D359 /* XcodeDebug */,
 			);
 			productName = XCDebugExampleProject;
 			productReference = 974CB6AF2B004E070006D359 /* XCDebugExampleProject.app */;
@@ -119,7 +125,7 @@
 			);
 			mainGroup = 974CB6A62B004E070006D359;
 			packageReferences = (
-				974CB6C12B004E610006D359 /* XCLocalSwiftPackageReference "../.." */,
+				974CB6FB2B01AC250006D359 /* XCLocalSwiftPackageReference "../.." */,
 			);
 			productRefGroup = 974CB6B02B004E070006D359 /* Products */;
 			projectDirPath = "";
@@ -149,6 +155,7 @@
 			files = (
 				974CB6B52B004E070006D359 /* ContentView.swift in Sources */,
 				974CB6B32B004E070006D359 /* XCDebugExampleProjectApp.swift in Sources */,
+				974CB6FA2B01A3730006D359 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +376,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		974CB6C12B004E610006D359 /* XCLocalSwiftPackageReference "../.." */ = {
+		974CB6FB2B01AC250006D359 /* XCLocalSwiftPackageReference "../.." */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../..;
 		};
@@ -377,6 +384,10 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		974CB6C22B004E610006D359 /* XcodeDebug */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = XcodeDebug;
+		};
+		974CB6FC2B01AC250006D359 /* XcodeDebug */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = XcodeDebug;
 		};

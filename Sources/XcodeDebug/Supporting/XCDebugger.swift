@@ -20,12 +20,12 @@ final public class XCDebugger: ObservableObject, Logging {
 
     public var hasChanged = PassthroughSubject<Void, Never>()
 
-    private var customSettings: [String: any CustomDebugSettings] = [:]
+    private var customSettings: [String: any DebugSettings] = [:]
 
     private var monitoring: Bool = false
 
     public func get<Settings, Value>(_ keyPath: KeyPath<Settings, Value>) -> Value
-        where Settings: CustomDebugSettings
+        where Settings: DebugSettings
     {
         guard monitoring else {
             return Settings()[keyPath: keyPath]

@@ -3,7 +3,7 @@
 
 import Foundation
 
-internal struct Constants {
+public struct XCDebugConstants {
     static let displayName = "xcode_debug_display_name"
     static let key = "xcode_debug_key"
     static let jsonFileExtensions = ".json"

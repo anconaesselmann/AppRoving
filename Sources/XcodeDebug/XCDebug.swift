@@ -2,6 +2,7 @@
 //
 
 import Foundation
+import Combine
 
 public func XCDebugStart(_ onChange: @escaping () -> Void) throws {
     onChange()
@@ -14,7 +15,21 @@ public func XCDebugStop() {
 }
 
 public func XCDebug<Settings, Value>(_ keyPath: KeyPath<Settings, Value>) -> Value
-    where Settings: CustomDebugSettings
+    where Settings: DebugSettings
 {
     XCDebugger.shared.get(keyPath)
+}
+
+public extension XCDebugger {
+    static var change: ObservableObjectPublisher {
+        XCDebugger.shared.objectWillChange
+    }
+}
+
+public var XCDebugChanges: ObservableObjectPublisher {
+    XCDebugger.shared.objectWillChange
+}
+
+public func onXCDebugChange(_ onChange: @escaping () -> Void) -> AnyCancellable {
+    XCDebugger.shared.objectWillChange.sink(receiveValue: onChange)
 }

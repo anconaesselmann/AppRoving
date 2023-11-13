@@ -2,27 +2,6 @@
 //
 
 import SwiftUI
-import Combine
-
-@MainActor
-class LoginViewModel: ObservableObject {
-
-    private var bag = Set<AnyCancellable>()
-
-    init() {
-        XCDebugger.shared.objectWillChange.sink {
-            self.objectWillChange.send()
-        }.store(in: &bag)
-    }
-
-    var name: String {
-        if XCDebug(\LoginDebug.debugging) {
-            return XCDebug(\LoginDebug.name)
-        } else {
-            return "NA"
-        }
-    }
-}
 
 struct ContentView: View {
 
@@ -46,7 +25,7 @@ struct ContentView: View {
 
 import XcodeDebug
 
-struct LoginDebug: CustomDebugSettings {
+struct LoginDebug: DebugSettings {
     static let name: String = "Login"
 
     var debugging: Bool = false

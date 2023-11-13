@@ -5,7 +5,7 @@ import Foundation
 import Combine
 
 internal extension Task {
-  func eraseToAnyCancellable() -> AnyCancellable {
+    func eraseToAnyCancellable() -> AnyCancellable {
         AnyCancellable(cancel)
     }
 }
