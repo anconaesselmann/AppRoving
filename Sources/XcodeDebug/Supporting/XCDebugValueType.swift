@@ -12,21 +12,20 @@ public struct XCDebugValueType {
         case unsupportedType
     }
 
-    let valueType: ValueType
-    let nullable: Bool
+    public let valueType: ValueType
+    public let nullable: Bool
 
     var typeString: String {
         valueType.rawValue
     }
 
-    init(type: String, nullable: Bool) throws {
+    public init(type: String, nullable: Bool) throws {
         self.nullable = nullable
-        switch type {
-        case ValueType.bool.rawValue:
-            valueType = .bool
-        default:
+
+        guard let valueType = ValueType(rawValue: type) else {
             throw Error.unsupportedType
         }
+        self.valueType = valueType
     }
 
     public init<T>(_ type: T.Type) throws {

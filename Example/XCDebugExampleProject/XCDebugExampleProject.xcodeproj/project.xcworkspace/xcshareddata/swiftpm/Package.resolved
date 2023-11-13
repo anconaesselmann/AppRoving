@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "xcodedebug",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/anconaesselmann/XcodeDebug",
+      "state" : {
+        "revision" : "d408a6e2d280c33806731f1a9be426084aac4f60",
+        "version" : "0.1.2"
+      }
+    }
+  ],
+  "version" : 2
+}
