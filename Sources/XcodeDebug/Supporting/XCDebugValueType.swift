@@ -3,32 +3,78 @@
 
 import Foundation
 
-public enum XCDebugValueType: String {
+public struct XCDebugValueType {
+    public enum ValueType: String {
+        case bool, int, double, string, date, uuid, url
+    }
 
     public enum Error: Swift.Error {
         case unsupportedType
     }
 
-    case bool, int, double, string, date, uuid, url
-    case optionalBool, optionalInt, optionalDouble, optionalString, optionalDate, optionalUuid, optionalUrl
+    let valueType: ValueType
+    let nullable: Bool
 
-    init<T>(_ type: T.Type) throws {
+    var typeString: String {
+        valueType.rawValue
+    }
+
+    init(type: String, nullable: Bool) throws {
+        self.nullable = nullable
         switch type {
-        case is Bool.Type: self = .bool
-        case is Bool?.Type: self = .optionalBool
-        case is Int.Type: self = .int
-        case is Int?.Type: self = .optionalInt
-        case is Double.Type: self = .double
-        case is Double?.Type: self = .optionalDouble
-        case is String.Type: self = .string
-        case is String?.Type: self = .optionalString
-        case is Date.Type: self = .date
-        case is Date?.Type: self = .optionalDate
-        case is UUID.Type: self = .uuid
-        case is UUID?.Type: self = .optionalUuid
-        case is URL.Type: self = .url
-        case is URL?.Type: self = .optionalUrl
-        default: throw Error.unsupportedType
+        case ValueType.bool.rawValue:
+            valueType = .bool
+        default:
+            throw Error.unsupportedType
+        }
+    }
+
+    public init<T>(_ type: T.Type) throws {
+        switch type {
+        case is Bool.Type:
+            self.valueType = .bool
+            self.nullable = false
+        case is Bool?.Type:
+            self.valueType = .bool
+            self.nullable = true
+        case is Int.Type:
+            self.valueType = .int
+            self.nullable = false
+        case is Int?.Type:
+            self.valueType = .int
+            self.nullable = true
+        case is Double.Type:
+            self.valueType = .double
+            self.nullable = false
+        case is Double?.Type:
+            self.valueType = .double
+            self.nullable = true
+        case is String.Type:
+            self.valueType = .string
+            self.nullable = false
+        case is String?.Type:
+            self.valueType = .string
+            self.nullable = true
+        case is Date.Type:
+            self.valueType = .date
+            self.nullable = false
+        case is Date?.Type:
+            self.valueType = .date
+            self.nullable = true
+        case is UUID.Type:
+            self.valueType = .uuid
+            self.nullable = false
+        case is UUID?.Type:
+            self.valueType = .uuid
+            self.nullable = true
+        case is URL.Type:
+            self.valueType = .url
+            self.nullable = false
+        case is URL?.Type:
+            self.valueType = .url
+            self.nullable = true
+        default:
+            throw Error.unsupportedType
         }
     }
 }

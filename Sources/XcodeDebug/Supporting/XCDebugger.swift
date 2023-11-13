@@ -42,9 +42,9 @@ final public class XCDebugger: ObservableObject {
                     .add(Settings.fileName)
                 if url.exists() {
                     let data = try Data(contentsOf: url, options: .mappedIfSafe)
-                    settings = try settings.updated(with: data)
+                    settings = try settings.fromSelfDescribingData(data)
                 } else {
-                    let data = try settings.data()
+                    let data = try settings.selfDescribingData()
                     try data.write(to: url)
                     startMonitoring(customUrl: url)
                 }
@@ -89,7 +89,7 @@ final public class XCDebugger: ObservableObject {
                 let key = url.fileName
                 for try await data in watcher {
                     if let settings = customSettings[key] {
-                        customSettings[key] = try settings.updated(with: data)
+                        customSettings[key] = try settings.fromSelfDescribingData(data)
                         self.onChange?()
                         Task { @MainActor in
                             self.hasChanged.send()

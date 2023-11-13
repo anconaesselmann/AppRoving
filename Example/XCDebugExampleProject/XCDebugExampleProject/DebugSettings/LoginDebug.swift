@@ -10,6 +10,6 @@ struct LoginDebug: DebugSettings {
     @XCDebugValue
     var debugging: Bool = false
 
-    @XCDebugValue
+    @XCDebugValue(caption: "Label Text", description: "This is the text of a label")
     var caption: String? = nil
 }
