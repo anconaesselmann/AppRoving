@@ -29,5 +29,5 @@ struct LoginDebug: DebugSettings {
     static let name: String = "Login"
 
     var debugging: Bool = false
-    var name: String = ""
+    var caption: String?
 }

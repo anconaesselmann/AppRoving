@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "xcodedebug",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/anconaesselmann/XcodeDebug",
+      "state" : {
+        "revision" : "87ba73f859f30c7730fd282f4ed72829ba9926e6",
+        "version" : "0.0.5"
+      }
+    },
+    {
       "identity" : "yetanotherlogger",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/anconaesselmann/YetAnotherLogger",

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		974CB6C32B004E610006D359 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 974CB6C22B004E610006D359 /* XcodeDebug */; };
 		974CB6FA2B01A3730006D359 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CB6F92B01A3730006D359 /* LoginViewModel.swift */; };
 		974CB6FD2B01AC250006D359 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 974CB6FC2B01AC250006D359 /* XcodeDebug */; };
+		97D421712B01E98D002C5E70 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97D421702B01E98D002C5E70 /* XcodeDebug */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				974CB6FD2B01AC250006D359 /* XcodeDebug in Frameworks */,
+				97D421712B01E98D002C5E70 /* XcodeDebug in Frameworks */,
 				974CB6C32B004E610006D359 /* XcodeDebug in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +97,7 @@
 			packageProductDependencies = (
 				974CB6C22B004E610006D359 /* XcodeDebug */,
 				974CB6FC2B01AC250006D359 /* XcodeDebug */,
+				97D421702B01E98D002C5E70 /* XcodeDebug */,
 			);
 			productName = XCDebugExampleProject;
 			productReference = 974CB6AF2B004E070006D359 /* XCDebugExampleProject.app */;
@@ -125,7 +128,7 @@
 			);
 			mainGroup = 974CB6A62B004E070006D359;
 			packageReferences = (
-				974CB6FB2B01AC250006D359 /* XCLocalSwiftPackageReference "../.." */,
+				97D4216F2B01E98D002C5E70 /* XCRemoteSwiftPackageReference "XcodeDebug" */,
 			);
 			productRefGroup = 974CB6B02B004E070006D359 /* Products */;
 			projectDirPath = "";
@@ -375,12 +378,16 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		974CB6FB2B01AC250006D359 /* XCLocalSwiftPackageReference "../.." */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../..;
+/* Begin XCRemoteSwiftPackageReference section */
+		97D4216F2B01E98D002C5E70 /* XCRemoteSwiftPackageReference "XcodeDebug" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/anconaesselmann/XcodeDebug";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.5;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		974CB6C22B004E610006D359 /* XcodeDebug */ = {
@@ -389,6 +396,11 @@
 		};
 		974CB6FC2B01AC250006D359 /* XcodeDebug */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = XcodeDebug;
+		};
+		97D421702B01E98D002C5E70 /* XcodeDebug */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97D4216F2B01E98D002C5E70 /* XCRemoteSwiftPackageReference "XcodeDebug" */;
 			productName = XcodeDebug;
 		};
 /* End XCSwiftPackageProductDependency section */
