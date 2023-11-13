@@ -39,7 +39,7 @@ final public class XCDebugger: ObservableObject, Logging {
         }  else {
             settings = Settings()
             do {
-                let url = try debugFolderLocation()
+                let url = try Self.debugFolderLocation()
                     .add(Settings.fileName)
                 if url.exists() {
                     let data = try Data(contentsOf: url, options: .mappedIfSafe)
@@ -61,7 +61,7 @@ final public class XCDebugger: ObservableObject, Logging {
     }
 
     public func startMonitoring() throws {
-        let directoryUrl = try debugFolderLocation()
+        let directoryUrl = try Self.debugFolderLocation()
         stopMonitoring()
         monitoring = true
         let urls = (directoryUrl.subdirectories ?? [])
@@ -102,8 +102,7 @@ final public class XCDebugger: ObservableObject, Logging {
     }
 
     private func startMonitoringSettings() throws {
-        let url = try xcdebugSettingsFolderLocation()
-            .add("status.json")
+        let url = try Self.appStatusFileLocation()
         if !url.exists() {
             let data = try status.data()
             try data.write(to: url)
@@ -139,15 +138,20 @@ final public class XCDebugger: ObservableObject, Logging {
         statusUrlWatcher = nil
     }
 
-    private func debugFolderLocation() throws -> URL {
+    private static func debugFolderLocation() throws -> URL {
         try URL.appLibraryDirectory()
             .appendingPathComponent("debug")
             .create()
     }
 
-    private func xcdebugSettingsFolderLocation() throws -> URL {
+    static func xcdebugSettingsFolderLocation() throws -> URL {
         try debugFolderLocation()
             .appendingPathComponent(".xcdebug")
             .create()
+    }
+
+    static func appStatusFileLocation() throws -> URL {
+        try xcdebugSettingsFolderLocation()
+            .add("status.json")
     }
 }

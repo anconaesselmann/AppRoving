@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9714BC072B021EA100CBD196 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 9714BC062B021EA100CBD196 /* XcodeDebug */; };
 		974CB6B32B004E070006D359 /* XCDebugExampleProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CB6B22B004E070006D359 /* XCDebugExampleProjectApp.swift */; };
 		974CB6B52B004E070006D359 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CB6B42B004E070006D359 /* ContentView.swift */; };
 		974CB6B72B004E090006D359 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 974CB6B62B004E090006D359 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 				974CB6FD2B01AC250006D359 /* XcodeDebug in Frameworks */,
 				97D4217A2B01EABA002C5E70 /* XcodeDebug in Frameworks */,
 				974CB6C32B004E610006D359 /* XcodeDebug in Frameworks */,
+				9714BC072B021EA100CBD196 /* XcodeDebug in Frameworks */,
 				97D421882B01FC78002C5E70 /* XcodeDebug in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -115,6 +117,7 @@
 				97D421792B01EABA002C5E70 /* XcodeDebug */,
 				97D421842B01FC45002C5E70 /* XcodeDebug */,
 				97D421872B01FC78002C5E70 /* XcodeDebug */,
+				9714BC062B021EA100CBD196 /* XcodeDebug */,
 			);
 			productName = XCDebugExampleProject;
 			productReference = 974CB6AF2B004E070006D359 /* XCDebugExampleProject.app */;
@@ -145,7 +148,7 @@
 			);
 			mainGroup = 974CB6A62B004E070006D359;
 			packageReferences = (
-				97D421862B01FC78002C5E70 /* XCLocalSwiftPackageReference "../.." */,
+				9714BC052B021EA100CBD196 /* XCRemoteSwiftPackageReference "XcodeDebug" */,
 			);
 			productRefGroup = 974CB6B02B004E070006D359 /* Products */;
 			projectDirPath = "";
@@ -396,14 +399,23 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		97D421862B01FC78002C5E70 /* XCLocalSwiftPackageReference "../.." */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../..;
+/* Begin XCRemoteSwiftPackageReference section */
+		9714BC052B021EA100CBD196 /* XCRemoteSwiftPackageReference "XcodeDebug" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/anconaesselmann/XcodeDebug";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.7;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9714BC062B021EA100CBD196 /* XcodeDebug */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9714BC052B021EA100CBD196 /* XCRemoteSwiftPackageReference "XcodeDebug" */;
+			productName = XcodeDebug;
+		};
 		974CB6C22B004E610006D359 /* XcodeDebug */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = XcodeDebug;
