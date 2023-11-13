@@ -15,13 +15,13 @@ public func XCDebugStop() {
 }
 
 public func XCDebug<Settings, Value>(_ keyPath: KeyPath<Settings, Value>) -> Value
-    where Settings: DebugSettings
+        where Settings: DebugSettings, Value: XCDebugValueCompatible
 {
     XCDebugger.shared.get(keyPath)
 }
 
 public func XCDebug<Settings, Value>(_ keyPath: KeyPath<Settings, Value?>) -> Value?
-    where Settings: DebugSettings
+    where Settings: DebugSettings, Value: XCDebugValueCompatible
 {
     XCDebugger.shared.get(keyPath)
 }

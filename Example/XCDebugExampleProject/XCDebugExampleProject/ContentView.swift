@@ -2,6 +2,7 @@
 //
 
 import SwiftUI
+import XcodeDebug
 
 struct ContentView: View {
 
@@ -21,13 +22,4 @@ struct ContentView: View {
         }
         .padding()
     }
-}
-
-import XcodeDebug
-
-struct LoginDebug: DebugSettings {
-    static let name: String = "Login"
-
-    var debugging: Bool = false
-    var caption: String?
 }

@@ -30,7 +30,7 @@ final public class XCDebugger: ObservableObject, Logging {
     public func get<Settings, Value>(_ keyPath: KeyPath<Settings, Value>) -> Value
         where Settings: DebugSettings
     {
-        guard monitoring, status.isEnabled(Settings.key) else {
+        guard monitoring else {
             return Settings()[keyPath: keyPath]
         }
         var settings: Settings
@@ -53,6 +53,9 @@ final public class XCDebugger: ObservableObject, Logging {
             } catch {
                 print(error)
             }
+        }
+        guard status.isEnabled(Settings.key) else {
+            return Settings()[keyPath: keyPath]
         }
         return settings[keyPath: keyPath]
     }
