@@ -17,10 +17,6 @@ class LoginViewModel: ObservableObject {
     }
 
     var name: String {
-        if XCDebug(\LoginDebug.debugging) {
-            return XCDebug(\LoginDebug.name)
-        } else {
-            return "NA"
-        }
+        XCDebug(\LoginDebug.caption) ?? "NA"
     }
 }

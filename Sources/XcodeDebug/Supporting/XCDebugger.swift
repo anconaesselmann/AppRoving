@@ -11,6 +11,7 @@ final public class XCDebugger: ObservableObject, Logging {
     public static let shared = XCDebugger()
 
     private var customUrlWatchers: [URLWatcher] = []
+    private var statusUrlWatcher: URLWatcher?
 
     private var bag = Set<AnyCancellable>()
 
@@ -24,10 +25,12 @@ final public class XCDebugger: ObservableObject, Logging {
 
     private var monitoring: Bool = false
 
+    private var status: Status = Status()
+
     public func get<Settings, Value>(_ keyPath: KeyPath<Settings, Value>) -> Value
         where Settings: DebugSettings
     {
-        guard monitoring else {
+        guard monitoring, status.isEnabled(Settings.key) else {
             return Settings()[keyPath: keyPath]
         }
         var settings: Settings
@@ -61,6 +64,7 @@ final public class XCDebugger: ObservableObject, Logging {
         let urls = (directoryUrl.subdirectories ?? [])
             .filter { $0.fileExtension.lowercased() == "json" }
 
+        try startMonitoringSettings()
         for url in urls {
             startMonitoring(customUrl: url)
         }
@@ -94,15 +98,53 @@ final public class XCDebugger: ObservableObject, Logging {
         log("Watching XCDebug settings at: \(url.path(percentEncoded: false))")
     }
 
+    private func startMonitoringSettings() throws {
+        let url = try xcdebugSettingsFolderLocation()
+            .add("status.json")
+        if !url.exists() {
+            let data = try status.data()
+            try data.write(to: url)
+            startMonitoring(customUrl: url)
+        }
+        let watcher = URLWatcher(url: url, delay: 1)
+        Task { [weak self] in
+            guard let self = self else {
+                return
+            }
+            do {
+                for try await data in watcher {
+                    self.status = try self.status.updated(with: data)
+                    self.onChange?()
+                    Task { @MainActor in
+                        self.hasChanged.send()
+                        self.objectWillChange.send()
+                    }
+                }
+            } catch {
+                critical(error)
+            }
+        }
+        .eraseToAnyCancellable()
+        .store(in: &bag)
+        statusUrlWatcher = watcher
+    }
+
     public func stopMonitoring() {
         monitoring = false
         bag = Set()
         customUrlWatchers = []
+        statusUrlWatcher = nil
     }
 
     private func debugFolderLocation() throws -> URL {
         try URL.appLibraryDirectory()
             .appendingPathComponent("debug")
+            .create()
+    }
+
+    private func xcdebugSettingsFolderLocation() throws -> URL {
+        try debugFolderLocation()
+            .appendingPathComponent(".xcdebug")
             .create()
     }
 }
