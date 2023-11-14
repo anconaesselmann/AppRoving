@@ -35,9 +35,32 @@ public struct SelfDescribingJson {
         self.properties = properties
     }
 
+    let formatter: ISO8601DateFormatter = ISO8601DateFormatter()
+
+    func mapValue(_ any: Any) -> Any {
+        guard var dict = any as? [String: Any], let value = dict["value"] else {
+            return any
+        }
+        switch value {
+        case let date as Date:
+            guard
+                let data = try? JSONEncoder().encode(date),
+                let string = String(data: data, encoding: .utf8),
+                let double = Double(string)
+            else {
+                return any
+            }
+            dict["value"] = double
+        default: ()
+        }
+        return dict
+    }
+
     public func data() throws -> Data {
         var dict = [String: Any]()
-        dict[XCDebugConstants.properties] = properties
+        dict[XCDebugConstants.properties] = properties.reduce(into: [String: Any]()) {
+            $0[$1.key] = mapValue($1.value)
+        }
         dict[XCDebugConstants.displayName] = name
         dict[XCDebugConstants.key] = key
         return try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
