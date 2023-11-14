@@ -7,9 +7,19 @@ import XcodeDebug
 struct LoginDebug: DebugSettings {
     static let name: String = "Login"
 
-    @XCDebugValue
-    var debugging: Bool = false
+    @XCDebugValue(caption: "User Name", description: "This is the user name")
+    var userName: String? = nil
 
-    @XCDebugValue(caption: "Label Text", description: "This is the text of a label")
-    var caption: String? = nil
+    @XCDebugValue(caption: "Password", description: "This is the user's password")
+    var password: String? = nil
+
+    @XCDebugValue(caption: "User birthday", description: "This is the date the user was born")
+    var birthday: Date? = nil
+}
+
+struct GeneralDebug: DebugSettings {
+    static let name: String = "General"
+
+    @XCDebugValue
+    var enableFootnote: Bool = false
 }

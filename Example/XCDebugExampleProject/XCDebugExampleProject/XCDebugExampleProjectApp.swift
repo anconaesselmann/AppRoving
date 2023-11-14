@@ -3,6 +3,9 @@
 
 import SwiftUI
 
+import EventTriggeredButton
+typealias Button = EventTriggeredButton.ETButton
+
 #if DEBUG
 import XcodeDebug
 typealias XCDebug = XcodeDebug.XCDebugger
@@ -27,6 +30,8 @@ struct XCDebugExampleProjectApp: App {
         do {
             try XCDebugger.start {
 
+            } onLog: {
+                print($0)
             }
         } catch {
             assertionFailure(error.localizedDescription)

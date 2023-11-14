@@ -11,16 +11,32 @@ struct ContentView: View {
 #endif
 
     @StateObject
-    var vm = LoginViewModel()
+    var navManager = NavManager.shared
 
     var body: some View {
-        VStack {
-            if XCDebug.get(\LoginDebug.debugging) {
-                Text("Debugging")
+        NavigationStack(path: $navManager.path) {
+            VStack {
+                GroupBox {
+                    Text("Hello, world!")
+                        .font(.headline)
+                    if XCDebug.get(\GeneralDebug.enableFootnote) {
+                        Text("Footnonte")
+                            .font(.footnote)
+                    }
+                } label: {
+                    Text("General")
+                }
+                GroupBox {
+                    LoginView()
+                } label: {
+                    Text("Login")
+                }
+                Spacer()
             }
-            Text("Hello, world!")
-            Text(vm.name)
+            .padding()
+            .navigationDestination(for: Screen.self) { i in
+                Text("Logged in")
+            }
         }
-        .padding()
     }
 }

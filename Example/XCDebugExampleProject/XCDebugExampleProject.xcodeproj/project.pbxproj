@@ -7,10 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		97107D022B02EC16001CEDD2 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97107D012B02EC16001CEDD2 /* Screen.swift */; };
+		97107D0D2B0344D4001CEDD2 /* CustomEventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97107D0C2B0344D4001CEDD2 /* CustomEventManager.swift */; };
+		97107D102B035B50001CEDD2 /* EventTriggeredButton in Frameworks */ = {isa = PBXBuildFile; productRef = 97107D0F2B035B50001CEDD2 /* EventTriggeredButton */; };
+		97107D132B035B7C001CEDD2 /* EventTriggeredButton in Frameworks */ = {isa = PBXBuildFile; productRef = 97107D122B035B7C001CEDD2 /* EventTriggeredButton */; };
+		97107D162B035C5E001CEDD2 /* EventTriggeredButton in Frameworks */ = {isa = PBXBuildFile; productRef = 97107D152B035C5E001CEDD2 /* EventTriggeredButton */; };
+		97107D192B035E05001CEDD2 /* EventTriggeredButton in Frameworks */ = {isa = PBXBuildFile; productRef = 97107D182B035E04001CEDD2 /* EventTriggeredButton */; };
+		97107D1D2B035E59001CEDD2 /* EventId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97107D1C2B035E59001CEDD2 /* EventId.swift */; };
+		97107D1F2B035E90001CEDD2 /* ETButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97107D1E2B035E90001CEDD2 /* ETButton+Extensions.swift */; };
 		9714BC1D2B029B6800CBD196 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 9714BC1C2B029B6800CBD196 /* XcodeDebug */; };
 		9714BC242B02ACD300CBD196 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 9714BC232B02ACD300CBD196 /* XcodeDebug */; };
 		9714BC302B02B9F600CBD196 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 9714BC2F2B02B9F600CBD196 /* XcodeDebug */; };
 		9714BC332B02CE6900CBD196 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 9714BC322B02CE6900CBD196 /* XcodeDebug */; };
+		9714BC3D2B02E52E00CBD196 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9714BC3C2B02E52E00CBD196 /* Service.swift */; };
+		9714BC3F2B02EBE100CBD196 /* NavManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9714BC3E2B02EBE100CBD196 /* NavManager.swift */; };
 		974CB6B32B004E070006D359 /* XCDebugExampleProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CB6B22B004E070006D359 /* XCDebugExampleProjectApp.swift */; };
 		974CB6B52B004E070006D359 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CB6B42B004E070006D359 /* ContentView.swift */; };
 		974CB6B72B004E090006D359 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 974CB6B62B004E090006D359 /* Assets.xcassets */; };
@@ -25,6 +35,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		97107D012B02EC16001CEDD2 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		97107D0C2B0344D4001CEDD2 /* CustomEventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEventManager.swift; sourceTree = "<group>"; };
+		97107D1C2B035E59001CEDD2 /* EventId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventId.swift; sourceTree = "<group>"; };
+		97107D1E2B035E90001CEDD2 /* ETButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ETButton+Extensions.swift"; sourceTree = "<group>"; };
+		9714BC3C2B02E52E00CBD196 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		9714BC3E2B02EBE100CBD196 /* NavManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavManager.swift; sourceTree = "<group>"; };
 		974CB6AF2B004E070006D359 /* XCDebugExampleProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XCDebugExampleProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		974CB6B22B004E070006D359 /* XCDebugExampleProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCDebugExampleProjectApp.swift; sourceTree = "<group>"; };
 		974CB6B42B004E070006D359 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -41,12 +57,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				97D421852B01FC45002C5E70 /* XcodeDebug in Frameworks */,
+				97107D192B035E05001CEDD2 /* EventTriggeredButton in Frameworks */,
 				9714BC332B02CE6900CBD196 /* XcodeDebug in Frameworks */,
 				9714BC242B02ACD300CBD196 /* XcodeDebug in Frameworks */,
+				97107D162B035C5E001CEDD2 /* EventTriggeredButton in Frameworks */,
 				974CB6FD2B01AC250006D359 /* XcodeDebug in Frameworks */,
 				97D4217A2B01EABA002C5E70 /* XcodeDebug in Frameworks */,
+				97107D132B035B7C001CEDD2 /* EventTriggeredButton in Frameworks */,
 				9714BC302B02B9F600CBD196 /* XcodeDebug in Frameworks */,
 				974CB6C32B004E610006D359 /* XcodeDebug in Frameworks */,
+				97107D102B035B50001CEDD2 /* EventTriggeredButton in Frameworks */,
 				9714BC1D2B029B6800CBD196 /* XcodeDebug in Frameworks */,
 				97D421882B01FC78002C5E70 /* XcodeDebug in Frameworks */,
 			);
@@ -55,6 +75,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		97107D1A2B035E3F001CEDD2 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				9714BC3E2B02EBE100CBD196 /* NavManager.swift */,
+				97107D0C2B0344D4001CEDD2 /* CustomEventManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		97107D1B2B035E4D001CEDD2 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				97107D012B02EC16001CEDD2 /* Screen.swift */,
+				97107D1C2B035E59001CEDD2 /* EventId.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		97107D202B035EAE001CEDD2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				97107D1E2B035E90001CEDD2 /* ETButton+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		974CB6A62B004E070006D359 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +123,10 @@
 				974CB6B22B004E070006D359 /* XCDebugExampleProjectApp.swift */,
 				974CB6B42B004E070006D359 /* ContentView.swift */,
 				974CB6F92B01A3730006D359 /* LoginViewModel.swift */,
+				9714BC3C2B02E52E00CBD196 /* Service.swift */,
+				97107D202B035EAE001CEDD2 /* Extensions */,
+				97107D1B2B035E4D001CEDD2 /* Constants */,
+				97107D1A2B035E3F001CEDD2 /* Managers */,
 				97D4218C2B0217DE002C5E70 /* DebugSettings */,
 				974CB6B62B004E090006D359 /* Assets.xcassets */,
 				974CB6B82B004E090006D359 /* XCDebugExampleProject.entitlements */,
@@ -127,6 +177,10 @@
 				9714BC232B02ACD300CBD196 /* XcodeDebug */,
 				9714BC2F2B02B9F600CBD196 /* XcodeDebug */,
 				9714BC322B02CE6900CBD196 /* XcodeDebug */,
+				97107D0F2B035B50001CEDD2 /* EventTriggeredButton */,
+				97107D122B035B7C001CEDD2 /* EventTriggeredButton */,
+				97107D152B035C5E001CEDD2 /* EventTriggeredButton */,
+				97107D182B035E04001CEDD2 /* EventTriggeredButton */,
 			);
 			productName = XCDebugExampleProject;
 			productReference = 974CB6AF2B004E070006D359 /* XCDebugExampleProject.app */;
@@ -158,6 +212,7 @@
 			mainGroup = 974CB6A62B004E070006D359;
 			packageReferences = (
 				9714BC312B02CE6900CBD196 /* XCRemoteSwiftPackageReference "XcodeDebug" */,
+				97107D172B035E04001CEDD2 /* XCRemoteSwiftPackageReference "EventTriggeredButton" */,
 			);
 			productRefGroup = 974CB6B02B004E070006D359 /* Products */;
 			projectDirPath = "";
@@ -185,10 +240,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97107D022B02EC16001CEDD2 /* Screen.swift in Sources */,
 				974CB6B52B004E070006D359 /* ContentView.swift in Sources */,
 				974CB6B32B004E070006D359 /* XCDebugExampleProjectApp.swift in Sources */,
+				9714BC3D2B02E52E00CBD196 /* Service.swift in Sources */,
+				97107D1D2B035E59001CEDD2 /* EventId.swift in Sources */,
+				97107D0D2B0344D4001CEDD2 /* CustomEventManager.swift in Sources */,
+				97107D1F2B035E90001CEDD2 /* ETButton+Extensions.swift in Sources */,
 				974CB6FA2B01A3730006D359 /* LoginViewModel.swift in Sources */,
 				97D4218E2B0217EA002C5E70 /* LoginDebug.swift in Sources */,
+				9714BC3F2B02EBE100CBD196 /* NavManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +470,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		97107D172B035E04001CEDD2 /* XCRemoteSwiftPackageReference "EventTriggeredButton" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/anconaesselmann/EventTriggeredButton";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.1;
+			};
+		};
 		9714BC312B02CE6900CBD196 /* XCRemoteSwiftPackageReference "XcodeDebug" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/anconaesselmann/XcodeDebug";
@@ -420,6 +489,23 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		97107D0F2B035B50001CEDD2 /* EventTriggeredButton */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = EventTriggeredButton;
+		};
+		97107D122B035B7C001CEDD2 /* EventTriggeredButton */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = EventTriggeredButton;
+		};
+		97107D152B035C5E001CEDD2 /* EventTriggeredButton */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = EventTriggeredButton;
+		};
+		97107D182B035E04001CEDD2 /* EventTriggeredButton */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97107D172B035E04001CEDD2 /* XCRemoteSwiftPackageReference "EventTriggeredButton" */;
+			productName = EventTriggeredButton;
+		};
 		9714BC1C2B029B6800CBD196 /* XcodeDebug */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = XcodeDebug;

@@ -1,12 +1,21 @@
 {
   "pins" : [
     {
+      "identity" : "eventtriggeredbutton",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/anconaesselmann/EventTriggeredButton",
+      "state" : {
+        "revision" : "c3d9afbefa22d8c611972bd4aedb4f8697521456",
+        "version" : "0.0.1"
+      }
+    },
+    {
       "identity" : "xcodedebug",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/anconaesselmann/XcodeDebug",
       "state" : {
-        "revision" : "d408a6e2d280c33806731f1a9be426084aac4f60",
-        "version" : "0.1.2"
+        "revision" : "43f4a9fcfa7f719605a9020f23b314457a0865bf",
+        "version" : "0.2.0"
       }
     }
   ],
