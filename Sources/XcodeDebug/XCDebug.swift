@@ -23,7 +23,7 @@ public extension XCDebugger {
     }
 
     static func get<Settings, Value>(_ keyPath: KeyPath<Settings, Value?>) -> Value?
-        where Settings: DebugSettings, Value: XCDebugValueCompatible
+        where Settings: DebugSettings, Value: Codable
     {
         shared.get(keyPath)
     }

@@ -4,16 +4,22 @@
 import Foundation
 
 public struct SelfDescribingJson {
-    public var name: String
-    public var key: String
+
+    public typealias JSON = [String: Any]
+
+    public enum Keys: String {
+        case name, key, properties, value
+    }
+
+    public var name: String, key: String
     public var properties: [String: Any]
 
     public init(_ data: Data) throws {
         guard
-            let jsonDict = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-            let name = jsonDict[XCDebugConstants.displayName] as? String,
-            let key = jsonDict[XCDebugConstants.key] as? String,
-            let properties = jsonDict[XCDebugConstants.properties] as? [String: Any]
+            let jsonDict = try JSONSerialization.jsonObject(with: data) as? JSON,
+            let name: String = jsonDict[.name],
+            let key:  String = jsonDict[.key],
+            let properties: JSON = jsonDict[.properties]
         else {
             throw DebugSettingsError.invalidData
         }
@@ -27,18 +33,19 @@ public struct SelfDescribingJson {
     {
         let data = try DefaultCoders.encoder.encode(setting)
         let jsonData = try JSONSerialization.jsonObject(with: data)
-        guard var properties = jsonData as? [String: Any] else {
+        guard var properties = jsonData as? JSON else {
             throw CustomSettingsError.notAValidDictionary
         }
         name = T.name
-        key = T.key
+        key  = T.key
         self.properties = properties
     }
 
-    let formatter: ISO8601DateFormatter = ISO8601DateFormatter()
-
-    func mapValue(_ any: Any) -> Any {
-        guard var dict = any as? [String: Any], let value = dict["value"] else {
+    private func mapValue(_ any: Any) -> Any {
+        guard 
+            var dict = any as? JSON,
+            let value = dict[.value]
+        else {
             return any
         }
         switch value {
@@ -50,19 +57,19 @@ public struct SelfDescribingJson {
             else {
                 return any
             }
-            dict["value"] = double
+            dict[.value] = double
         default: ()
         }
         return dict
     }
 
     public func data() throws -> Data {
-        var dict = [String: Any]()
-        dict[XCDebugConstants.properties] = properties.reduce(into: [String: Any]()) {
+        var dict = JSON()
+        dict[.properties] = properties.reduce(into: JSON()) {
             $0[$1.key] = mapValue($1.value)
         }
-        dict[XCDebugConstants.displayName] = name
-        dict[XCDebugConstants.key] = key
+        dict[.name] = name
+        dict[.key]  = key
         return try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
     }
 

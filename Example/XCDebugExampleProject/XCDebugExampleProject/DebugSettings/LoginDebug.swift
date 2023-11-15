@@ -15,6 +15,12 @@ struct LoginDebug: DebugSettings {
 
     @XCDebugValue(caption: "User birthday", description: "This is the date the user was born")
     var birthday: Date? = nil
+
+    @XCDebugValue(caption: "A number", description: "This is a number")
+    var aNumber: Int? = nil
+
+    @XCDebugValue(caption: "A Double", description: "This is a Double")
+    var aDouble: Double? = nil
 }
 
 struct GeneralDebug: DebugSettings {
