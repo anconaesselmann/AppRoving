@@ -21,6 +21,9 @@ struct LoginDebug: DebugSettings {
 
     @XCDebugValue(caption: "A Double", description: "This is a Double")
     var aDouble: Double? = nil
+
+    @XCDebugValue(caption: "An enum", description: "This is an enum")
+    var anEnum: Screen = .loggedIn
 }
 
 struct GeneralDebug: DebugSettings {

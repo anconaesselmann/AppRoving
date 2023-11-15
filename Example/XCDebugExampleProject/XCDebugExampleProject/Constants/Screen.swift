@@ -3,6 +3,7 @@
 
 import Foundation
 
-enum Screen: String {
+enum Screen: String, Codable, CaseIterable {
     case loggedIn
+    case userDetail
 }

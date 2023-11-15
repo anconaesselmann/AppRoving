@@ -85,6 +85,7 @@ struct DefaultCoders {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         encoder.outputFormatting = .prettyPrinted
+        encoder.outputFormatting = .sortedKeys
         return encoder
     }()
 

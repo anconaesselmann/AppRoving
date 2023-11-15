@@ -5,7 +5,7 @@ import Foundation
 
 public struct XCDebugValueType {
     public enum ValueType: String {
-        case bool, int, double, string, date, uuid, url
+        case bool, int, double, string, date, uuid, url, `enum`, object
     }
 
     public enum Error: Swift.Error {
@@ -14,21 +14,26 @@ public struct XCDebugValueType {
 
     public let valueType: ValueType
     public let nullable: Bool
+    public let cases: [String]?
 
     var typeString: String {
         valueType.rawValue
     }
 
-    public init(type: String, nullable: Bool) throws {
+    public init(type: String, nullable: Bool, cases: [String]?) throws {
         self.nullable = nullable
 
         guard let valueType = ValueType(rawValue: type) else {
             throw Error.unsupportedType
         }
         self.valueType = valueType
+        self.cases = cases
     }
 
-    public init<T>(_ type: T.Type) throws {
+    public init<T>(_ value: T, type: T.Type) throws
+        where T: Codable
+    {
+        var cases: [String]?
         switch type {
         case is Bool.Type:
             self.valueType = .bool
@@ -73,7 +78,29 @@ public struct XCDebugValueType {
             self.valueType = .url
             self.nullable = true
         default:
-            throw Error.unsupportedType
+            switch value {
+            case let e as (any CaseIterable & RawRepresentable) where e.rawValue is String:
+                self.valueType = .enum
+                self.nullable = false
+                cases = e.allCases as? [String]
+            case let e as (any CaseIterable & RawRepresentable)? where e?.rawValue is String:
+                self.valueType = .enum
+                self.nullable = true
+                cases = e?.allCases as? [String]
+            default:
+                throw Error.unsupportedType
+            }
         }
+        self.cases = cases
+    }
+}
+
+extension CaseIterable 
+    where Self: RawRepresentable
+{
+    var allCases: [Self.RawValue] {
+        let type = type(of: self)
+        let allCases = type.allCases
+        return allCases.map { $0.rawValue }
     }
 }

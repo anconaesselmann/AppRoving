@@ -8,7 +8,7 @@ public struct XCDebugValue<T>: Codable
     where T: Codable
 {
     enum CodingKeys: CodingKey {
-        case type, value, caption, description, nullable
+        case type, value, caption, description, nullable, cases
     }
 
     public var wrappedValue: T
@@ -34,9 +34,10 @@ public struct XCDebugValue<T>: Codable
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        let type = try XCDebugValueType(T.self)
+        let type = try XCDebugValueType(self.wrappedValue, type: T.self)
         try container.encode(type.typeString, forKey: .type)
         try container.encode(type.nullable, forKey: .nullable)
+        try container.encodeIfPresent(type.cases, forKey: .cases)
         try container.encode(wrappedValue, forKey: .value)
         try container.encodeIfPresent(caption, forKey: .caption)
         try container.encodeIfPresent(description, forKey: .description)

@@ -70,13 +70,13 @@ public struct SelfDescribingJson {
         }
         dict[.name] = name
         dict[.key]  = key
-        return try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
+        return try JSONSerialization.data(withJSONObject: dict, options: [.sortedKeys, .prettyPrinted])
     }
 
     public func properties<T>(as type: T.Type) throws -> T
         where T: Decodable
     {
-        let data = try JSONSerialization.data(withJSONObject: properties, options: .prettyPrinted)
+        let data = try JSONSerialization.data(withJSONObject: properties, options: [.sortedKeys, .prettyPrinted])
         return try DefaultCoders.decoder.decode(T.self, from: data)
     }
 }
