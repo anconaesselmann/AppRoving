@@ -59,8 +59,71 @@ public struct XCDebugValue<T>: Codable
         try container.encode(type.typeString, forKey: .type)
         try container.encode(type.nullable, forKey: .nullable)
         try container.encodeIfPresent(type.cases, forKey: .cases)
-        try container.encode(wrappedValue, forKey: .value)
+        if let enumValue = wrappedValue as? (any XCDebugEnum) {
+            let stringValue = enumValue.stringValue
+            try container.encode(stringValue, forKey: .value)
+        } else {
+            try container.encode(wrappedValue, forKey: .value)
+        }
         try container.encodeIfPresent(caption, forKey: .caption)
         try container.encodeIfPresent(description, forKey: .description)
+    }
+}
+
+public protocol XCDebugEnum: Codable, CaseIterable, RawRepresentable {
+    var stringValue: String { get }
+    init(stringValue: String) throws
+}
+
+enum XCDebugEnumError: Swift.Error {
+    case invalidStringRepresentation
+}
+
+public extension XCDebugEnum {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let stringValue = try container.decode(String.self)
+        try self.init(stringValue: stringValue)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        let stringValue = self.stringValue
+        try container.encode(stringValue)
+    }
+}
+
+public extension XCDebugEnum where RawValue == String {
+    init(stringValue: String) throws {
+        self.init(rawValue: stringValue)!
+    }
+    var stringValue: String {
+        rawValue
+    }
+}
+
+public extension XCDebugEnum where RawValue == Int {
+    init(stringValue: String) throws {
+        guard let intValue = Int(stringValue) else {
+            throw XCDebugEnumError.invalidStringRepresentation
+        }
+        self.init(rawValue: intValue)!
+    }
+
+    var stringValue: String {
+        "\(rawValue)"
+    }
+}
+
+public extension XCDebugEnum where RawValue == Double {
+    init(stringValue: String) throws {
+        guard let doubleValue = Double(stringValue) else {
+            throw XCDebugEnumError.invalidStringRepresentation
+        }
+        self.init(rawValue: doubleValue)!
+    }
+
+    var stringValue: String {
+        "\(rawValue)"
     }
 }

@@ -4,13 +4,15 @@
 import Foundation
 import XcodeDebug
 
-enum IntEnum: Int, Codable, CaseIterable {
+enum IntEnum: Int, XCDebugEnum {
     case zero, one, two
 }
 
-enum DoubleEnum: Double, Codable, CaseIterable {
+enum DoubleEnum: Double, XCDebugEnum {
     case zero, one, two
 }
+
+extension Screen: XCDebugEnum { }
 
 struct LoginDebug: DebugSettings {
     static let name: String = "Login"

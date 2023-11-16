@@ -19,6 +19,9 @@ struct LoginView: View {
                 DatePicker("Birthday", selection: $vm.birthday)
                 TextField("A Number", text: $vm.aNumber)
                 TextField("A Double", text: $vm.aDouble)
+                TextField("Screen", text: $vm.screen)
+                TextField("Int enum", text: $vm.intEnum)
+                TextField("Double enum", text: $vm.doubleEnum)
                 Button("Log in") {
                     vm.logIn()
                 }.register(.loginButton)
@@ -52,6 +55,10 @@ class LoginViewModel: ObservableObject {
     var aNumber = ""
     var aDouble = ""
 
+    var screen = ""
+    var intEnum = ""
+    var doubleEnum = ""
+
     init() {
 #if DEBUG
         XCDebug.onChange {
@@ -74,6 +81,9 @@ class LoginViewModel: ObservableObject {
         } else {
             aDouble = ""
         }
+        screen = XCDebug.get(\LoginDebug.anEnum)?.stringValue ?? ""
+        intEnum = XCDebug.get(\LoginDebug.anIntEnum)?.stringValue ?? ""
+        doubleEnum = XCDebug.get(\LoginDebug.aDoubleEnum)?.stringValue ?? ""
         self.objectWillChange.send()
     }
 
