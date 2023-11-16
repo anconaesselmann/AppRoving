@@ -19,13 +19,17 @@ public extension XCDebugger {
     static func get<Settings>(_ keyPath: KeyPath<Settings, Bool>) -> Bool
         where Settings: DebugSettings
     {
-        shared.get(keyPath)
+        shared.get(keyPath) ?? false
     }
 
     static func get<Settings, Value>(_ keyPath: KeyPath<Settings, Value?>) -> Value?
         where Settings: DebugSettings, Value: Codable
     {
-        shared.get(keyPath)
+        if let value = shared.get(keyPath) {
+            return value
+        } else {
+            return nil
+        }
     }
 
     static func get<Settings, Value>(_ keyPath: KeyPath<Settings, Value>) -> Value?

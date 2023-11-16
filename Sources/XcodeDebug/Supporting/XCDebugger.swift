@@ -26,11 +26,11 @@ final public class XCDebugger: ObservableObject {
 
     private init() { }
 
-    public func get<Settings, Value>(_ keyPath: KeyPath<Settings, Value>) -> Value
+    public func get<Settings, Value>(_ keyPath: KeyPath<Settings, Value>) -> Value?
         where Settings: DebugSettings
     {
         guard monitoring else {
-            return Settings()[keyPath: keyPath]
+            return nil
         }
         var settings: Settings
         if let existing = customSettings[Settings.key] as? Settings {
@@ -54,7 +54,7 @@ final public class XCDebugger: ObservableObject {
             }
         }
         guard status.isEnabled(Settings.key) else {
-            return Settings()[keyPath: keyPath]
+            return nil
         }
         return settings[keyPath: keyPath]
     }
