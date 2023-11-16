@@ -3,19 +3,19 @@
 
 import Foundation
 
-@propertyWrapper
-public struct XCDebugValue<T>: Codable
-    where T: Codable
-{
-    enum CodingKeys: CodingKey {
-        case type, value, caption, description, nullable, cases
+public extension XCDebugValue {
+    init<V>(
+        caption: String? = nil,
+        description: String? = nil
+    ) where T == Optional<V> {
+        self.wrappedValue = nil
+        self.caption = caption
+        self.description = description
     }
+}
 
-    public var wrappedValue: T
-    public var caption: String?
-    public var description: String?
-
-    public init(
+public extension XCDebugValue {
+    init(
         wrappedValue: T,
         caption: String? = nil,
         description: String? = nil
@@ -24,6 +24,27 @@ public struct XCDebugValue<T>: Codable
         self.caption = caption
         self.description = description
     }
+}
+
+@propertyWrapper
+public struct XCDebugValue<T>: Codable
+    where T: Codable
+{
+    enum CodingKeys: CodingKey {
+        case type, value, caption, description, nullable, cases
+    }
+
+    public 
+    private(set)
+    var wrappedValue: T
+
+    public
+    private(set)
+    var caption: String?
+
+    public
+    private(set)
+    var description: String?
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

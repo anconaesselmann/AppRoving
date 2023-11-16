@@ -34,59 +34,27 @@ public struct XCDebugValueType {
         where T: Codable
     {
         var cases: [String]?
+        self.nullable = T.self is OptionalProtocol.Type
         switch type {
-        case is Bool.Type:
+        case is Bool.Type, is Bool?.Type:
             self.valueType = .bool
-            self.nullable = false
-        case is Bool?.Type:
-            self.valueType = .bool
-            self.nullable = true
-        case is Int.Type:
+        case is Int.Type, is Int?.Type:
             self.valueType = .int
-            self.nullable = false
-        case is Int?.Type:
-            self.valueType = .int
-            self.nullable = true
-        case is Double.Type:
+        case is Double.Type, is Double?.Type:
             self.valueType = .double
-            self.nullable = false
-        case is Double?.Type:
-            self.valueType = .double
-            self.nullable = true
-        case is String.Type:
+        case is String.Type, is String?.Type:
             self.valueType = .string
-            self.nullable = false
-        case is String?.Type:
-            self.valueType = .string
-            self.nullable = true
-        case is Date.Type:
+        case is Date.Type, is Date?.Type:
             self.valueType = .date
-            self.nullable = false
-        case is Date?.Type:
-            self.valueType = .date
-            self.nullable = true
-        case is UUID.Type:
+        case is UUID.Type, is UUID?.Type:
             self.valueType = .uuid
-            self.nullable = false
-        case is UUID?.Type:
-            self.valueType = .uuid
-            self.nullable = true
-        case is URL.Type:
+        case is URL.Type, is URL?.Type:
             self.valueType = .url
-            self.nullable = false
-        case is URL?.Type:
-            self.valueType = .url
-            self.nullable = true
         default:
             switch value {
-            case let e as (any CaseIterable & RawRepresentable) where e.rawValue is String:
+            case let e as (any CaseIterable & RawRepresentable):
                 self.valueType = .enum
-                self.nullable = false
-                cases = e.allCases as? [String]
-            case let e as (any CaseIterable & RawRepresentable)? where e?.rawValue is String:
-                self.valueType = .enum
-                self.nullable = true
-                cases = e?.allCases as? [String]
+                cases = e.allCases.map { "\($0)" } as? [String]
             default:
                 throw Error.unsupportedType
             }
@@ -95,7 +63,7 @@ public struct XCDebugValueType {
     }
 }
 
-extension CaseIterable 
+extension CaseIterable
     where Self: RawRepresentable
 {
     var allCases: [Self.RawValue] {
@@ -103,4 +71,20 @@ extension CaseIterable
         let allCases = type.allCases
         return allCases.map { $0.rawValue }
     }
+}
+
+protocol OptionalProtocol {}
+
+extension Optional : OptionalProtocol {
+    var wrappedValue: Wrapped? {
+        switch self {
+        case .some(let value): return value
+        case .none: return nil
+        }
+    }
+
+    static var wrappedType: Wrapped.Type {
+        Wrapped.self
+    }
+
 }

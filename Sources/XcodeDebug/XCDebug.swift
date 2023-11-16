@@ -28,6 +28,12 @@ public extension XCDebugger {
         shared.get(keyPath)
     }
 
+    static func get<Settings, Value>(_ keyPath: KeyPath<Settings, Value>) -> Value?
+        where Settings: DebugSettings, Value: Codable
+    {
+        shared.get(keyPath)
+    }
+
     static var changed: ObservableObjectPublisher {
         shared.objectWillChange
     }

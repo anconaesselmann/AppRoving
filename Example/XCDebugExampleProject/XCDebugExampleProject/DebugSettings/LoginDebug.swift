@@ -4,26 +4,40 @@
 import Foundation
 import XcodeDebug
 
+enum IntEnum: Int, Codable, CaseIterable {
+    case zero, one, two
+}
+
+enum DoubleEnum: Double, Codable, CaseIterable {
+    case zero, one, two
+}
+
 struct LoginDebug: DebugSettings {
     static let name: String = "Login"
 
     @XCDebugValue(caption: "User Name", description: "This is the user name")
-    var userName: String? = nil
+    var userName: String?
 
     @XCDebugValue(caption: "Password", description: "This is the user's password")
-    var password: String? = nil
+    var password: String?
 
     @XCDebugValue(caption: "User birthday", description: "This is the date the user was born")
-    var birthday: Date? = nil
+    var birthday: Date?
 
     @XCDebugValue(caption: "A number", description: "This is a number")
-    var aNumber: Int? = nil
+    var aNumber: Int?
 
     @XCDebugValue(caption: "A Double", description: "This is a Double")
     var aDouble: Double? = nil
 
     @XCDebugValue(caption: "An enum", description: "This is an enum")
-    var anEnum: Screen = .loggedIn
+    var anEnum: Screen? = .loggedIn
+
+    @XCDebugValue(caption: "An int enum", description: "This is an int enum")
+    var anIntEnum: IntEnum? = .zero
+
+    @XCDebugValue(caption: "An double enum", description: "This is a double enum")
+    var aDoubleEnum: DoubleEnum? = .zero
 }
 
 struct GeneralDebug: DebugSettings {
