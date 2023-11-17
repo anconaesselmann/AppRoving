@@ -34,8 +34,11 @@ struct ContentView: View {
                 Spacer()
             }
             .padding()
-            .navigationDestination(for: Screen.self) { i in
-                Text("Logged in")
+            .navigationDestination(for: Screen.self) { screen in
+                switch screen {
+                case .loggedIn: Text("Logged in")
+                case .userDetail: Text("User detail")
+                }
             }
         }
     }

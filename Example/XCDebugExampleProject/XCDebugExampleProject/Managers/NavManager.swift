@@ -18,7 +18,6 @@ class NavManager: ObservableObject {
         XCDebug.changed.sink {
             self.updateAfterRemoteScreenChangeRequest()
         }.store(in: &bag)
-
     }
 
     func updateAfterRemoteScreenChangeRequest() {
@@ -33,7 +32,6 @@ class NavManager: ObservableObject {
                 } else {
                     path.append(screen)
                 }
-
             }
         } else {
             Task { @MainActor in
