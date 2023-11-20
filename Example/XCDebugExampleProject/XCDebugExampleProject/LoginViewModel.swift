@@ -15,8 +15,10 @@ struct LoginView: View {
         ZStack {
             VStack {
                 TextField("Email", text: $vm.email)
-                TextField("Password", text: $vm.password)
+                SecureField("Password", text: $vm.password)
+                #if !os(tvOS)
                 DatePicker("Birthday", selection: $vm.birthday)
+                #endif
                 TextField("A Number", text: $vm.aNumber)
                 TextField("A Double", text: $vm.aDouble)
                 TextField("Screen", text: $vm.screen)
@@ -29,7 +31,11 @@ struct LoginView: View {
                     CustomEventManager.shared.eventFired(.init(id: EventId.loginButton.uuid, sender: UUID()))
                 }
             }
+            #if os(tvOS)
+            .textFieldStyle(.automatic)
+            #else
             .textFieldStyle(.roundedBorder)
+            #endif
             if vm.loading {
                 ProgressView()
             }

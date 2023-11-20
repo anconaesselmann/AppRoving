@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,14 +30,47 @@
 		97CB6E022B055B7C00DD2602 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6E012B055B7C00DD2602 /* XcodeDebug */; };
 		97CB6E082B056DF500DD2602 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6E072B056DF500DD2602 /* XcodeDebug */; };
 		97CB6E162B057D8700DD2602 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6E152B057D8700DD2602 /* XcodeDebug */; };
-		97CB6E192B05C7E100DD2602 /* EventTriggeredButton in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6E182B05C7E100DD2602 /* EventTriggeredButton */; };
 		97CB6E2B2B05D39000DD2602 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6E2A2B05D39000DD2602 /* XcodeDebug */; };
-		97CB6E2E2B05E6C800DD2602 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6E2D2B05E6C800DD2602 /* XcodeDebug */; };
+		97CB6EAC2B0AD69D00DD2602 /* EventTriggeredButton in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6EAB2B0AD69D00DD2602 /* EventTriggeredButton */; };
+		97CB6EAF2B0AD96300DD2602 /* EventTriggeredButton in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6EAE2B0AD96300DD2602 /* EventTriggeredButton */; };
+		97CB6EB82B0AD9B000DD2602 /* WatchXCDebugExampleProject Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 97CB6EB72B0AD9B000DD2602 /* WatchXCDebugExampleProject Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		97CB6EBD2B0AD9B000DD2602 /* WatchXCDebugExampleProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB6EBC2B0AD9B000DD2602 /* WatchXCDebugExampleProjectApp.swift */; };
+		97CB6EBF2B0AD9B000DD2602 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB6EBE2B0AD9B000DD2602 /* ContentView.swift */; };
+		97CB6EC12B0AD9B200DD2602 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97CB6EC02B0AD9B200DD2602 /* Assets.xcassets */; };
+		97CB6EC42B0AD9B200DD2602 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97CB6EC32B0AD9B200DD2602 /* Preview Assets.xcassets */; };
+		97CB6ECE2B0ADBF800DD2602 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6ECD2B0ADBF800DD2602 /* XcodeDebug */; };
+		97CB6ECF2B0ADC2600DD2602 /* LoginDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D4218D2B0217EA002C5E70 /* LoginDebug.swift */; };
+		97CB6ED02B0ADC3500DD2602 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97107D012B02EC16001CEDD2 /* Screen.swift */; };
+		97CB6ED12B0ADC3C00DD2602 /* EventId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97107D1C2B035E59001CEDD2 /* EventId.swift */; };
 		97D4217A2B01EABA002C5E70 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97D421792B01EABA002C5E70 /* XcodeDebug */; };
 		97D421852B01FC45002C5E70 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97D421842B01FC45002C5E70 /* XcodeDebug */; };
 		97D421882B01FC78002C5E70 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97D421872B01FC78002C5E70 /* XcodeDebug */; };
 		97D4218E2B0217EA002C5E70 /* LoginDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D4218D2B0217EA002C5E70 /* LoginDebug.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		97CB6EB92B0AD9B000DD2602 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 974CB6A72B004E070006D359 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 97CB6EB62B0AD9B000DD2602;
+			remoteInfo = "WatchXCDebugExampleProject Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		97CB6EC82B0AD9B200DD2602 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				97CB6EB82B0AD9B000DD2602 /* WatchXCDebugExampleProject Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		97107D012B02EC16001CEDD2 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
@@ -53,6 +86,12 @@
 		974CB6B82B004E090006D359 /* XCDebugExampleProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XCDebugExampleProject.entitlements; sourceTree = "<group>"; };
 		974CB6BA2B004E090006D359 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		974CB6F92B01A3730006D359 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		97CB6EB22B0AD9B000DD2602 /* WatchXCDebugExampleProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchXCDebugExampleProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		97CB6EB72B0AD9B000DD2602 /* WatchXCDebugExampleProject Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchXCDebugExampleProject Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		97CB6EBC2B0AD9B000DD2602 /* WatchXCDebugExampleProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchXCDebugExampleProjectApp.swift; sourceTree = "<group>"; };
+		97CB6EBE2B0AD9B000DD2602 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		97CB6EC02B0AD9B200DD2602 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		97CB6EC32B0AD9B200DD2602 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		97D4218D2B0217EA002C5E70 /* LoginDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDebug.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,15 +109,23 @@
 				974CB6FD2B01AC250006D359 /* XcodeDebug in Frameworks */,
 				97D4217A2B01EABA002C5E70 /* XcodeDebug in Frameworks */,
 				97107D132B035B7C001CEDD2 /* EventTriggeredButton in Frameworks */,
+				97CB6EAC2B0AD69D00DD2602 /* EventTriggeredButton in Frameworks */,
 				97CB6E082B056DF500DD2602 /* XcodeDebug in Frameworks */,
-				97CB6E2E2B05E6C800DD2602 /* XcodeDebug in Frameworks */,
 				97CB6E2B2B05D39000DD2602 /* XcodeDebug in Frameworks */,
+				97CB6EAF2B0AD96300DD2602 /* EventTriggeredButton in Frameworks */,
 				9714BC302B02B9F600CBD196 /* XcodeDebug in Frameworks */,
 				974CB6C32B004E610006D359 /* XcodeDebug in Frameworks */,
 				97107D102B035B50001CEDD2 /* EventTriggeredButton in Frameworks */,
 				9714BC1D2B029B6800CBD196 /* XcodeDebug in Frameworks */,
 				97D421882B01FC78002C5E70 /* XcodeDebug in Frameworks */,
-				97CB6E192B05C7E100DD2602 /* EventTriggeredButton in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97CB6EB42B0AD9B000DD2602 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97CB6ECE2B0ADBF800DD2602 /* XcodeDebug in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				974CB6B12B004E070006D359 /* XCDebugExampleProject */,
+				97CB6EBB2B0AD9B000DD2602 /* WatchXCDebugExampleProject Watch App */,
 				974CB6B02B004E070006D359 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -123,6 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				974CB6AF2B004E070006D359 /* XCDebugExampleProject.app */,
+				97CB6EB22B0AD9B000DD2602 /* WatchXCDebugExampleProject.app */,
+				97CB6EB72B0AD9B000DD2602 /* WatchXCDebugExampleProject Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,6 +199,25 @@
 			isa = PBXGroup;
 			children = (
 				974CB6BA2B004E090006D359 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		97CB6EBB2B0AD9B000DD2602 /* WatchXCDebugExampleProject Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				97CB6EBC2B0AD9B000DD2602 /* WatchXCDebugExampleProjectApp.swift */,
+				97CB6EBE2B0AD9B000DD2602 /* ContentView.swift */,
+				97CB6EC02B0AD9B200DD2602 /* Assets.xcassets */,
+				97CB6EC22B0AD9B200DD2602 /* Preview Content */,
+			);
+			path = "WatchXCDebugExampleProject Watch App";
+			sourceTree = "<group>";
+		};
+		97CB6EC22B0AD9B200DD2602 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				97CB6EC32B0AD9B200DD2602 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -193,12 +262,49 @@
 				97CB6E012B055B7C00DD2602 /* XcodeDebug */,
 				97CB6E072B056DF500DD2602 /* XcodeDebug */,
 				97CB6E152B057D8700DD2602 /* XcodeDebug */,
-				97CB6E182B05C7E100DD2602 /* EventTriggeredButton */,
 				97CB6E2A2B05D39000DD2602 /* XcodeDebug */,
-				97CB6E2D2B05E6C800DD2602 /* XcodeDebug */,
+				97CB6EAB2B0AD69D00DD2602 /* EventTriggeredButton */,
+				97CB6EAE2B0AD96300DD2602 /* EventTriggeredButton */,
 			);
 			productName = XCDebugExampleProject;
 			productReference = 974CB6AF2B004E070006D359 /* XCDebugExampleProject.app */;
+			productType = "com.apple.product-type.application";
+		};
+		97CB6EB12B0AD9B000DD2602 /* WatchXCDebugExampleProject */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97CB6EC92B0AD9B200DD2602 /* Build configuration list for PBXNativeTarget "WatchXCDebugExampleProject" */;
+			buildPhases = (
+				97CB6EB02B0AD9B000DD2602 /* Resources */,
+				97CB6EC82B0AD9B200DD2602 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				97CB6EBA2B0AD9B000DD2602 /* PBXTargetDependency */,
+			);
+			name = WatchXCDebugExampleProject;
+			productName = WatchXCDebugExampleProject;
+			productReference = 97CB6EB22B0AD9B000DD2602 /* WatchXCDebugExampleProject.app */;
+			productType = "com.apple.product-type.application.watchapp2-container";
+		};
+		97CB6EB62B0AD9B000DD2602 /* WatchXCDebugExampleProject Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97CB6EC52B0AD9B200DD2602 /* Build configuration list for PBXNativeTarget "WatchXCDebugExampleProject Watch App" */;
+			buildPhases = (
+				97CB6EB32B0AD9B000DD2602 /* Sources */,
+				97CB6EB42B0AD9B000DD2602 /* Frameworks */,
+				97CB6EB52B0AD9B000DD2602 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WatchXCDebugExampleProject Watch App";
+			packageProductDependencies = (
+				97CB6ECD2B0ADBF800DD2602 /* XcodeDebug */,
+			);
+			productName = "WatchXCDebugExampleProject Watch App";
+			productReference = 97CB6EB72B0AD9B000DD2602 /* WatchXCDebugExampleProject Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -214,6 +320,12 @@
 					974CB6AE2B004E070006D359 = {
 						CreatedOnToolsVersion = 15.0;
 					};
+					97CB6EB12B0AD9B000DD2602 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					97CB6EB62B0AD9B000DD2602 = {
+						CreatedOnToolsVersion = 15.0;
+					};
 				};
 			};
 			buildConfigurationList = 974CB6AA2B004E070006D359 /* Build configuration list for PBXProject "XCDebugExampleProject" */;
@@ -226,14 +338,16 @@
 			);
 			mainGroup = 974CB6A62B004E070006D359;
 			packageReferences = (
-				97CB6E172B05C7E100DD2602 /* XCRemoteSwiftPackageReference "EventTriggeredButton" */,
-				97CB6E2C2B05E6C800DD2602 /* XCRemoteSwiftPackageReference "XcodeDebug" */,
+				97CB6EAD2B0AD96200DD2602 /* XCRemoteSwiftPackageReference "EventTriggeredButton" */,
+				97CB6ECC2B0ADB1800DD2602 /* XCLocalSwiftPackageReference "../.." */,
 			);
 			productRefGroup = 974CB6B02B004E070006D359 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				974CB6AE2B004E070006D359 /* XCDebugExampleProject */,
+				97CB6EB12B0AD9B000DD2602 /* WatchXCDebugExampleProject */,
+				97CB6EB62B0AD9B000DD2602 /* WatchXCDebugExampleProject Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -245,6 +359,22 @@
 			files = (
 				974CB6BB2B004E090006D359 /* Preview Assets.xcassets in Resources */,
 				974CB6B72B004E090006D359 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97CB6EB02B0AD9B000DD2602 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97CB6EB52B0AD9B000DD2602 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97CB6EC42B0AD9B200DD2602 /* Preview Assets.xcassets in Resources */,
+				97CB6EC12B0AD9B200DD2602 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,7 +398,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		97CB6EB32B0AD9B000DD2602 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97CB6EBF2B0AD9B000DD2602 /* ContentView.swift in Sources */,
+				97CB6EBD2B0AD9B000DD2602 /* WatchXCDebugExampleProjectApp.swift in Sources */,
+				97CB6ECF2B0ADC2600DD2602 /* LoginDebug.swift in Sources */,
+				97CB6ED02B0ADC3500DD2602 /* Screen.swift in Sources */,
+				97CB6ED12B0ADC3C00DD2602 /* EventId.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		97CB6EBA2B0AD9B000DD2602 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 97CB6EB62B0AD9B000DD2602 /* WatchXCDebugExampleProject Watch App */;
+			targetProxy = 97CB6EB92B0AD9B000DD2602 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		974CB6BC2B004E090006D359 /* Debug */ = {
@@ -416,10 +566,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.anconaesselmann.XCDebugExampleProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3";
 			};
 			name = Debug;
 		};
@@ -454,10 +605,105 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.anconaesselmann.XCDebugExampleProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3";
+			};
+			name = Release;
+		};
+		97CB6EC62B0AD9B200DD2602 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchXCDebugExampleProject Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = D7MN23CD5F;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WatchXCDebugExampleProject;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKWatchOnly = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anconaesselmann.WatchXCDebugExampleProject.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		97CB6EC72B0AD9B200DD2602 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchXCDebugExampleProject Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = D7MN23CD5F;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = WatchXCDebugExampleProject;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKWatchOnly = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anconaesselmann.WatchXCDebugExampleProject.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		97CB6ECA2B0AD9B200DD2602 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D7MN23CD5F;
+				INFOPLIST_KEY_CFBundleDisplayName = WatchXCDebugExampleProject;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anconaesselmann.WatchXCDebugExampleProject;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		97CB6ECB2B0AD9B200DD2602 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D7MN23CD5F;
+				INFOPLIST_KEY_CFBundleDisplayName = WatchXCDebugExampleProject;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anconaesselmann.WatchXCDebugExampleProject;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -482,23 +728,40 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		97CB6EC52B0AD9B200DD2602 /* Build configuration list for PBXNativeTarget "WatchXCDebugExampleProject Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97CB6EC62B0AD9B200DD2602 /* Debug */,
+				97CB6EC72B0AD9B200DD2602 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		97CB6EC92B0AD9B200DD2602 /* Build configuration list for PBXNativeTarget "WatchXCDebugExampleProject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97CB6ECA2B0AD9B200DD2602 /* Debug */,
+				97CB6ECB2B0AD9B200DD2602 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		97CB6ECC2B0ADB1800DD2602 /* XCLocalSwiftPackageReference "../.." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
-		97CB6E172B05C7E100DD2602 /* XCRemoteSwiftPackageReference "EventTriggeredButton" */ = {
+		97CB6EAD2B0AD96200DD2602 /* XCRemoteSwiftPackageReference "EventTriggeredButton" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/anconaesselmann/EventTriggeredButton";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.2;
-			};
-		};
-		97CB6E2C2B05E6C800DD2602 /* XCRemoteSwiftPackageReference "XcodeDebug" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/anconaesselmann/XcodeDebug";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.2.7;
+				minimumVersion = 0.0.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -552,18 +815,21 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = XcodeDebug;
 		};
-		97CB6E182B05C7E100DD2602 /* EventTriggeredButton */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 97CB6E172B05C7E100DD2602 /* XCRemoteSwiftPackageReference "EventTriggeredButton" */;
-			productName = EventTriggeredButton;
-		};
 		97CB6E2A2B05D39000DD2602 /* XcodeDebug */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = XcodeDebug;
 		};
-		97CB6E2D2B05E6C800DD2602 /* XcodeDebug */ = {
+		97CB6EAB2B0AD69D00DD2602 /* EventTriggeredButton */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 97CB6E2C2B05E6C800DD2602 /* XCRemoteSwiftPackageReference "XcodeDebug" */;
+			productName = EventTriggeredButton;
+		};
+		97CB6EAE2B0AD96300DD2602 /* EventTriggeredButton */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97CB6EAD2B0AD96200DD2602 /* XCRemoteSwiftPackageReference "EventTriggeredButton" */;
+			productName = EventTriggeredButton;
+		};
+		97CB6ECD2B0ADBF800DD2602 /* XcodeDebug */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = XcodeDebug;
 		};
 		97D421792B01EABA002C5E70 /* XcodeDebug */ = {

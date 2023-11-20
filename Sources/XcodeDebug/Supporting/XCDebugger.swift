@@ -48,7 +48,7 @@ final public class XCDebugger: ObservableObject {
                     try data.write(to: url)
                     startMonitoring(customUrl: url)
                 }
-                customSettings[Settings.key] = settings
+                customSettings[Settings.key] = settings // Note: saw crash here
             } catch {
                 log(error)
             }
@@ -89,7 +89,7 @@ final public class XCDebugger: ObservableObject {
                 let key = url.fileName
                 for try await data in watcher {
                     if let settings = customSettings[key] {
-                        customSettings[key] = try settings.fromSelfDescribingData(data)
+                        customSettings[key] = try settings.fromSelfDescribingData(data) // TODO: crashes after debug folder is whiped
                         self.onChange?()
                         Task { @MainActor in
                             self.hasChanged.send()
