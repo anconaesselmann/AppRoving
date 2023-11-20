@@ -16,12 +16,14 @@ public extension XCDebugger {
         shared.stopMonitoring()
     }
 
+    @MainActor
     static func get<Settings>(_ keyPath: KeyPath<Settings, Bool>) -> Bool
         where Settings: DebugSettings
     {
         shared.get(keyPath) ?? false
     }
 
+    @MainActor
     static func get<Settings, Value>(_ keyPath: KeyPath<Settings, Value?>) -> Value?
         where Settings: DebugSettings, Value: Codable
     {
@@ -32,6 +34,7 @@ public extension XCDebugger {
         }
     }
 
+    @MainActor
     static func get<Settings, Value>(_ keyPath: KeyPath<Settings, Value>) -> Value?
         where Settings: DebugSettings, Value: Codable
     {

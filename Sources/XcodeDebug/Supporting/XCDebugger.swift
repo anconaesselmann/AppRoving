@@ -26,6 +26,7 @@ final public class XCDebugger: ObservableObject {
 
     private init() { }
 
+    @MainActor
     public func get<Settings, Value>(_ keyPath: KeyPath<Settings, Value>) -> Value?
         where Settings: DebugSettings
     {
@@ -48,7 +49,7 @@ final public class XCDebugger: ObservableObject {
                     try data.write(to: url)
                     startMonitoring(customUrl: url)
                 }
-                customSettings[Settings.key] = settings // Note: saw crash here
+                customSettings[Settings.key] = settings // Todo: saw crash here. Likely needs to be isolated to a serial thread
             } catch {
                 log(error)
             }
