@@ -21,6 +21,11 @@ extension URL {
             .add("status.json")
     }
 
+    static func buildTimeFileLocation() throws -> URL {
+        try xcdebugSettingsFolderLocation()
+            .add("buildInfo.json")
+    }
+
     static func appLibraryDirectory(in fileManager: FileManager = FileManager.default) throws -> URL {
         try fileManager.url(
             for: .libraryDirectory,
@@ -80,8 +85,8 @@ extension URL {
     }
 }
 
-struct DefaultCoders {
-    static var encoder: JSONEncoder = {
+public struct DefaultCoders {
+    public static var encoder: JSONEncoder = {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         encoder.outputFormatting = .prettyPrinted
@@ -89,7 +94,7 @@ struct DefaultCoders {
         return encoder
     }()
 
-    static var decoder: JSONDecoder = {
+    public static var decoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder

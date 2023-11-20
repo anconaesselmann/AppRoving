@@ -71,6 +71,14 @@ final public class XCDebugger: ObservableObject {
         for url in urls {
             startMonitoring(customUrl: url)
         }
+        try markBuildTime()
+    }
+
+    private func markBuildTime() throws {
+        let url = try URL.buildTimeFileLocation()
+        let buildInfo = BuildInfo(lastBuilt: .now)
+        let data = try DefaultCoders.encoder.encode(buildInfo)
+        try data.write(to: url)
     }
 
     public func stopMonitoring() {
