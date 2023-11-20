@@ -4,6 +4,7 @@
 import SwiftUI
 import Combine
 
+@MainActor
 class NavManager: ObservableObject {
 
     var bag = Set<AnyCancellable>()
