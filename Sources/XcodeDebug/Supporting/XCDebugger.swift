@@ -61,10 +61,10 @@ final public class XCDebugger: ObservableObject {
     }
 
     public func startMonitoring() throws {
+        // TODO: Create all settings files here. Don't create when accessing.
         let appInitializationStatusFileLocation = try URL.appInitializationStatusFileLocation()
-        guard appInitializationStatusFileLocation.exists() else {
-            XCDebugSetupInstructions.notify()
-            return
+        if !appInitializationStatusFileLocation.exists() {
+            try XCDebugSetupInstructions.notify()
         }
         let directoryUrl = try URL.debugFolderLocation()
         stopMonitoring()
@@ -118,7 +118,6 @@ final public class XCDebugger: ObservableObject {
         .eraseToAnyCancellable()
         .store(in: &bag)
         customUrlWatchers.append(watcher)
-        log("Watching XCDebug settings at: \(url.path(percentEncoded: false))")
     }
 
     private func startMonitoringSettings() throws {

@@ -3,14 +3,31 @@
 
 import Foundation
 
-public extension URL {
-    static func appInitializationStatusFileLocation() throws -> URL {
-        try xcdebugSettingsFolderLocation()
-            .add("initialization_status.json")
+extension URL {
+    func truncate(until lastComponentMatches: (String) -> Bool) -> URL? {
+        var current = self
+        while !current.lastPathComponent.isEmpty && current.lastPathComponent != "/" {
+            if lastComponentMatches(current.lastPathComponent) {
+                return current
+            }
+            current = current.deletingLastPathComponent()
+        }
+        return nil
     }
 }
 
 extension URL {
+
+
+    static func simulatorFolderLocation() throws -> URL? {
+        try URL.appLibraryDirectory().truncate {
+                UUID(uuidString: $0) != nil
+            }?.deletingLastPathComponent()
+            .truncate {
+                UUID(uuidString: $0) != nil
+            }
+    }
+
     static func debugFolderLocation() throws -> URL {
         try URL.appLibraryDirectory()
             .appendingPathComponent("debug")
@@ -26,6 +43,11 @@ extension URL {
     static func appStatusFileLocation() throws -> URL {
         try xcdebugSettingsFolderLocation()
             .add("status.json")
+    }
+
+    static func appInitializationStatusFileLocation() throws -> URL {
+        try xcdebugSettingsFolderLocation()
+            .add("initialization_status.json")
     }
 
     static func buildTimeFileLocation() throws -> URL {
