@@ -7,7 +7,7 @@ struct ContentView: View {
 
 #if DEBUG
     @StateObject
-    var debugger = XCDebug.shared
+    var debug = XCDebugObserver()
 #endif
 
     @StateObject
