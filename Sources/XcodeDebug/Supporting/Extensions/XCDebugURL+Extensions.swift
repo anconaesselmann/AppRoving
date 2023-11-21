@@ -3,6 +3,13 @@
 
 import Foundation
 
+public extension URL {
+    static func appInitializationStatusFileLocation() throws -> URL {
+        try xcdebugSettingsFolderLocation()
+            .add("initialization_status.json")
+    }
+}
+
 extension URL {
     static func debugFolderLocation() throws -> URL {
         try URL.appLibraryDirectory()

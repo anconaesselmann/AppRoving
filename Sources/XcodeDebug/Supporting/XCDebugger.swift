@@ -61,6 +61,11 @@ final public class XCDebugger: ObservableObject {
     }
 
     public func startMonitoring() throws {
+        let appInitializationStatusFileLocation = try URL.appInitializationStatusFileLocation()
+        guard appInitializationStatusFileLocation.exists() else {
+            XCDebugSetupInstructions.notify()
+            return
+        }
         let directoryUrl = try URL.debugFolderLocation()
         stopMonitoring()
         monitoring = true
