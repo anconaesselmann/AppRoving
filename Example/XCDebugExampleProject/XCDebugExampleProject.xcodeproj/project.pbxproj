@@ -28,6 +28,7 @@
 		974CB6FA2B01A3730006D359 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CB6F92B01A3730006D359 /* LoginViewModel.swift */; };
 		974CB6FD2B01AC250006D359 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 974CB6FC2B01AC250006D359 /* XcodeDebug */; };
 		975431872B0D6244002376F3 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 975431862B0D6244002376F3 /* XcodeDebug */; };
+		975431932B0EBB74002376F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 975431922B0EBB74002376F3 /* Assets.xcassets */; };
 		97CB6E022B055B7C00DD2602 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6E012B055B7C00DD2602 /* XcodeDebug */; };
 		97CB6E082B056DF500DD2602 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6E072B056DF500DD2602 /* XcodeDebug */; };
 		97CB6E162B057D8700DD2602 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6E152B057D8700DD2602 /* XcodeDebug */; };
@@ -37,7 +38,6 @@
 		97CB6EB82B0AD9B000DD2602 /* WatchXCDebugExampleProject Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 97CB6EB72B0AD9B000DD2602 /* WatchXCDebugExampleProject Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		97CB6EBD2B0AD9B000DD2602 /* WatchXCDebugExampleProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB6EBC2B0AD9B000DD2602 /* WatchXCDebugExampleProjectApp.swift */; };
 		97CB6EBF2B0AD9B000DD2602 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB6EBE2B0AD9B000DD2602 /* ContentView.swift */; };
-		97CB6EC12B0AD9B200DD2602 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97CB6EC02B0AD9B200DD2602 /* Assets.xcassets */; };
 		97CB6EC42B0AD9B200DD2602 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97CB6EC32B0AD9B200DD2602 /* Preview Assets.xcassets */; };
 		97CB6ECF2B0ADC2600DD2602 /* LoginDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D4218D2B0217EA002C5E70 /* LoginDebug.swift */; };
 		97CB6ED02B0ADC3500DD2602 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97107D012B02EC16001CEDD2 /* Screen.swift */; };
@@ -86,11 +86,11 @@
 		974CB6B82B004E090006D359 /* XCDebugExampleProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XCDebugExampleProject.entitlements; sourceTree = "<group>"; };
 		974CB6BA2B004E090006D359 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		974CB6F92B01A3730006D359 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		975431922B0EBB74002376F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97CB6EB22B0AD9B000DD2602 /* WatchXCDebugExampleProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchXCDebugExampleProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97CB6EB72B0AD9B000DD2602 /* WatchXCDebugExampleProject Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchXCDebugExampleProject Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		97CB6EBC2B0AD9B000DD2602 /* WatchXCDebugExampleProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchXCDebugExampleProjectApp.swift; sourceTree = "<group>"; };
 		97CB6EBE2B0AD9B000DD2602 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		97CB6EC02B0AD9B200DD2602 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97CB6EC32B0AD9B200DD2602 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		97D4218D2B0217EA002C5E70 /* LoginDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDebug.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -208,7 +208,7 @@
 			children = (
 				97CB6EBC2B0AD9B000DD2602 /* WatchXCDebugExampleProjectApp.swift */,
 				97CB6EBE2B0AD9B000DD2602 /* ContentView.swift */,
-				97CB6EC02B0AD9B200DD2602 /* Assets.xcassets */,
+				975431922B0EBB74002376F3 /* Assets.xcassets */,
 				97CB6EC22B0AD9B200DD2602 /* Preview Content */,
 			);
 			path = "WatchXCDebugExampleProject Watch App";
@@ -373,8 +373,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				975431932B0EBB74002376F3 /* Assets.xcassets in Resources */,
 				97CB6EC42B0AD9B200DD2602 /* Preview Assets.xcassets in Resources */,
-				97CB6EC12B0AD9B200DD2602 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
