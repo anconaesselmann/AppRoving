@@ -60,8 +60,17 @@ final public class XCDebugger: ObservableObject {
         return settings[keyPath: keyPath]
     }
 
+    private func saveAppIcon() throws {
+        if let appIconData = Data(pngDataFor: "AppIcon") {
+            let iconLocation = try URL.xcdebugSettingsFolderLocation()
+                .add("AppIcon.png")
+            try appIconData.write(to: iconLocation)
+        }
+    }
+
     public func startMonitoring() throws {
         // TODO: Create all settings files here. Don't create when accessing.
+        try saveAppIcon()
         let appInitializationStatusFileLocation = try URL.appInitializationStatusFileLocation()
         if !appInitializationStatusFileLocation.exists() {
             try XCDebugSetupInstructions.notify()
