@@ -6,6 +6,7 @@ import SwiftUI
 #if DEBUG
 import XcodeDebug
 typealias XCDebug = XcodeDebug.XCDebugger
+typealias XCDebugObserver = XcodeDebug.XCDebugObserver
 #else
 import Combine
 struct XCDebug {

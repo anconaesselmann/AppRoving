@@ -90,7 +90,13 @@ final public class XCDebugger: ObservableObject {
 
     private func markBuildTime() throws {
         let url = try URL.buildTimeFileLocation()
-        let buildInfo = BuildInfo(lastBuilt: .now)
+        let bundle = Bundle.main
+        let buildInfo = BuildInfo(
+            lastBuilt: .now,
+            appName: bundle.displayName,
+            appVersion: bundle.appVersion,
+            buildVersion: bundle.buildVersion
+        )
         let data = try DefaultCoders.encoder.encode(buildInfo)
         try data.write(to: url)
     }
