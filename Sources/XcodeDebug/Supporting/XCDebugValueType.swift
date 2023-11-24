@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct XCDebugValueType {
+public struct XCDebugValueType: Equatable {
     public enum ValueType: String {
         case bool, int, double, string, date, uuid, url, `enum`, object
     }
