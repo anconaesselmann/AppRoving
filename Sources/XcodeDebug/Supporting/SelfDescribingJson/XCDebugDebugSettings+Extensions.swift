@@ -38,8 +38,8 @@ public extension DebugSettings {
     func updateFile(at url: URL) throws {
         let comparisonData = try Self().selfDescribingData()
         guard
-            let jsonDict = try JSONSerialization.jsonObject(with: comparisonData) as? SelfDescribingJson.JSON,
-            let comparisonProperties: SelfDescribingJson.JSON = jsonDict[.properties]
+            let comparisonJsonDict = try JSONSerialization.jsonObject(with: comparisonData) as? SelfDescribingJson.JSON,
+            let comparisonProperties: SelfDescribingJson.JSON = comparisonJsonDict[.properties]
         else {
             throw DebugSettingsError.invalidData
         }
@@ -50,6 +50,12 @@ public extension DebugSettings {
             var properties: SelfDescribingJson.JSON = jsonDict[.properties]
         else {
             throw DebugSettingsError.invalidData
+        }
+        let version = jsonDict["version"] as? String
+        let comparisonVersion = comparisonJsonDict["version"] as? String
+        guard version == comparisonVersion else {
+            try comparisonData.write(to: url)
+            return
         }
         let keys = Set(properties.keys)
 

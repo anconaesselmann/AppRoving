@@ -8,10 +8,10 @@ public struct SelfDescribingJson {
     public typealias JSON = [String: Any]
 
     public enum Keys: String {
-        case name, key, properties, value
+        case name, key, properties, value, version
     }
 
-    public var name: String, key: String
+    public var name: String, key: String, version: Version
     public var properties: [String: Any]
 
     public init(_ data: Data) throws {
@@ -19,13 +19,15 @@ public struct SelfDescribingJson {
             let jsonDict = try JSONSerialization.jsonObject(with: data) as? JSON,
             let name: String = jsonDict[.name],
             let key:  String = jsonDict[.key],
-            let properties: JSON = jsonDict[.properties]
+            let properties: JSON = jsonDict[.properties],
+            let versionString: String = jsonDict[.version]
         else {
             throw DebugSettingsError.invalidData
         }
         self.key = key
         self.name = name
         self.properties = properties
+        self.version = try Version(versionString)
     }
 
     public init<T>(_ setting: T) throws
@@ -39,6 +41,7 @@ public struct SelfDescribingJson {
         name = T.name
         key  = T.key
         self.properties = properties
+        version = XCDebugConstants.version
     }
 
     public func data() throws -> Data {
@@ -48,6 +51,7 @@ public struct SelfDescribingJson {
         }
         dict[.name] = name
         dict[.key]  = key
+        dict[.version] = version.description
         return try JSONSerialization.data(withJSONObject: dict, options: [.sortedKeys, .prettyPrinted])
     }
 
