@@ -58,13 +58,12 @@ final public class XCDebugger: ObservableObject {
         return settings[keyPath: keyPath]
     }
 
-    public func startMonitoring() throws {
+    internal func startMonitoring() throws {
         try AppInfo.saveAppIcon()
         let appInitializationStatusFileLocation = try URL.appInitializationStatusFileLocation()
         if !appInitializationStatusFileLocation.exists() {
             try XCDebugSetupInstructions.notify()
         }
-        stopMonitoring()
         monitoring = true
 
         let url = try URL.appStatusFileLocation()
