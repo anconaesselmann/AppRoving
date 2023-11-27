@@ -78,13 +78,16 @@ final public class XCDebugger: ObservableObject {
     private func startMonitoring(customUrl url: URL) {
         let watcher = URLWatcher(url: url, delay: 1)
         urlWatchers.append(watcher)
-        watcher.sink { [weak self] data in
-            try self?.dataHasChanged(url: url, data: data)
+        watcher.sink { data in
+            Task { @MainActor [weak self] in
+                try self?.dataHasChanged(url: url, data: data)
+            }
         } onError: { [weak self] error in
             self?.log(error)
         }.store(in: &bag)
     }
 
+    @MainActor
     private func dataHasChanged(url: URL, data: Data) throws {
         let key = url.fileName
         guard var settings = customSettings[key] else {
@@ -93,9 +96,7 @@ final public class XCDebugger: ObservableObject {
         }
         customSettings[key] = try settings.updated(with: data)
         onChange?()
-        Task { @MainActor in
-            self.objectWillChange.send()
-        }
+        objectWillChange.send()
     }
 
     private func startMonitoringAppStatus() throws {
@@ -106,19 +107,20 @@ final public class XCDebugger: ObservableObject {
         }
         let watcher = URLWatcher(url: url, delay: 1)
         urlWatchers.append(watcher)
-        watcher.sink { [weak self] data in
-            try self?.appStatusHasChanged(data: data)
+        watcher.sink { data in
+            Task { @MainActor [weak self] in
+                try self?.appStatusHasChanged(data: data)
+            }
         } onError: { [weak self] error in
             self?.log(error)
         }.store(in: &bag)
     }
 
+    @MainActor
     private func appStatusHasChanged(data: Data) throws {
         status = try status.updated(with: data)
         onChange?()
-        Task { @MainActor in
-            self.objectWillChange.send()
-        }
+        objectWillChange.send()
     }
 
     private func log(_ error: Error) {
