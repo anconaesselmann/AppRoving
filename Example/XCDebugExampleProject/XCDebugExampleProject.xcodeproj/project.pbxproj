@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -31,6 +31,8 @@
 		975431932B0EBB74002376F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 975431922B0EBB74002376F3 /* Assets.xcassets */; };
 		977891182B1519CE002BC33C /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 977891172B1519CE002BC33C /* XcodeDebug */; };
 		977891272B153E77002BC33C /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 977891262B153E77002BC33C /* XcodeDebug */; };
+		9778912B2B15493A002BC33C /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 9778912A2B15493A002BC33C /* XcodeDebug */; };
+		9778912D2B154945002BC33C /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 9778912C2B154945002BC33C /* XcodeDebug */; };
 		97CB6E022B055B7C00DD2602 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6E012B055B7C00DD2602 /* XcodeDebug */; };
 		97CB6E082B056DF500DD2602 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6E072B056DF500DD2602 /* XcodeDebug */; };
 		97CB6E162B057D8700DD2602 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6E152B057D8700DD2602 /* XcodeDebug */; };
@@ -103,6 +105,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97CB6E022B055B7C00DD2602 /* XcodeDebug in Frameworks */,
+				9778912B2B15493A002BC33C /* XcodeDebug in Frameworks */,
 				97D421852B01FC45002C5E70 /* XcodeDebug in Frameworks */,
 				974A62D62B043A540067D480 /* EventTriggeredButton in Frameworks */,
 				9714BC242B02ACD300CBD196 /* XcodeDebug in Frameworks */,
@@ -129,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9778912D2B154945002BC33C /* XcodeDebug in Frameworks */,
 				977891182B1519CE002BC33C /* XcodeDebug in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,6 +275,7 @@
 				97CB6EAE2B0AD96300DD2602 /* EventTriggeredButton */,
 				975431862B0D6244002376F3 /* XcodeDebug */,
 				977891262B153E77002BC33C /* XcodeDebug */,
+				9778912A2B15493A002BC33C /* XcodeDebug */,
 			);
 			productName = XCDebugExampleProject;
 			productReference = 974CB6AF2B004E070006D359 /* XCDebugExampleProject.app */;
@@ -308,6 +313,7 @@
 			name = "WatchXCDebugExampleProject Watch App";
 			packageProductDependencies = (
 				977891172B1519CE002BC33C /* XcodeDebug */,
+				9778912C2B154945002BC33C /* XcodeDebug */,
 			);
 			productName = "WatchXCDebugExampleProject Watch App";
 			productReference = 97CB6EB72B0AD9B000DD2602 /* xcDebugger Example App.app */;
@@ -345,7 +351,7 @@
 			mainGroup = 974CB6A62B004E070006D359;
 			packageReferences = (
 				97CB6EAD2B0AD96200DD2602 /* XCRemoteSwiftPackageReference "EventTriggeredButton" */,
-				977891252B153E77002BC33C /* XCLocalSwiftPackageReference "../.." */,
+				977891292B15493A002BC33C /* XCRemoteSwiftPackageReference "XcodeDebug" */,
 			);
 			productRefGroup = 974CB6B02B004E070006D359 /* Products */;
 			projectDirPath = "";
@@ -756,14 +762,15 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		977891252B153E77002BC33C /* XCLocalSwiftPackageReference "../.." */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../..;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
+		977891292B15493A002BC33C /* XCRemoteSwiftPackageReference "XcodeDebug" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/anconaesselmann/XcodeDebug/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.15;
+			};
+		};
 		97CB6EAD2B0AD96200DD2602 /* XCRemoteSwiftPackageReference "EventTriggeredButton" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/anconaesselmann/EventTriggeredButton";
@@ -820,6 +827,15 @@
 			productName = XcodeDebug;
 		};
 		977891262B153E77002BC33C /* XcodeDebug */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = XcodeDebug;
+		};
+		9778912A2B15493A002BC33C /* XcodeDebug */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 977891292B15493A002BC33C /* XCRemoteSwiftPackageReference "XcodeDebug" */;
+			productName = XcodeDebug;
+		};
+		9778912C2B154945002BC33C /* XcodeDebug */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = XcodeDebug;
 		};
