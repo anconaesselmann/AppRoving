@@ -16,7 +16,7 @@ struct AppInfo {
         let url = try URL.buildTimeFileLocation()
         let bundle = Bundle.main
         let buildInfo = BuildInfo(
-            lastBuilt: .now,
+            lastBuilt: Date(),
             appName: bundle.displayName,
             appVersion: bundle.appVersion,
             buildVersion: bundle.buildVersion

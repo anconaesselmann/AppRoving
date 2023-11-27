@@ -23,7 +23,7 @@ struct XCDebugSetupInstructions {
     Mac application has to be registered with Xcode Debugger.
 
 Import-URL for Xcode Debugger:
-    \(appUrl.path(percentEncoded: false))
+    \(appUrl.backport.path(percentEncoded: false))
 
 
 Note:
@@ -55,7 +55,7 @@ Note:
     Simulator has to be registered with Xcode Debugger.
 
 Import-URL for Xcode Debugger:
-    \(simulatorUrl.path(percentEncoded: false))
+    \(simulatorUrl.backport.path(percentEncoded: false))
 
 
 Note:

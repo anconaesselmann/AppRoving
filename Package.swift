@@ -6,10 +6,10 @@ import PackageDescription
 let package = Package(
     name: "XcodeDebug",
     platforms: [
-        .macOS(.v14),
-        .iOS(.v17),
-        .watchOS(.v10),
-        .tvOS(.v17)
+        .macOS(.v12),
+        .iOS(.v14),
+        .watchOS(.v8),
+        .tvOS(.v15)
     ],
     products: [
         .library(

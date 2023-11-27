@@ -14,7 +14,7 @@ struct ContentView: View {
     var navManager = NavManager.shared
 
     var body: some View {
-        NavigationStack(path: $navManager.path) {
+//        NavigationStack(path: $navManager.path) {
             VStack {
 //                GroupBox {
                     Text("Hello, world!")
@@ -34,12 +34,12 @@ struct ContentView: View {
                 Spacer()
             }
             .padding()
-            .navigationDestination(for: Screen.self) { screen in
-                switch screen {
-                case .loggedIn: Text("Logged in")
-                case .userDetail: Text("User detail")
-                }
-            }
-        }
+//            .navigationDestination(for: Screen.self) { screen in
+//                switch screen {
+//                case .loggedIn: Text("Logged in")
+//                case .userDetail: Text("User detail")
+//                }
+//            }
+//        }
     }
 }

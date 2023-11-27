@@ -57,7 +57,7 @@ class LoginViewModel: ObservableObject {
 
     var email = ""
     var password = ""
-    var birthday = Date.now
+    var birthday = Date()
     var aNumber = ""
     var aDouble = ""
 
@@ -76,7 +76,7 @@ class LoginViewModel: ObservableObject {
     func update() {
         email = XCDebug.get(\LoginDebug.userName) ?? ""
         password = XCDebug.get(\LoginDebug.password) ?? ""
-        birthday = XCDebug.get(\LoginDebug.birthday) ?? .now
+        birthday = XCDebug.get(\LoginDebug.birthday) ?? Date()
         if let number = XCDebug.get(\LoginDebug.aNumber) {
             aNumber = "\(number)"
         } else {
