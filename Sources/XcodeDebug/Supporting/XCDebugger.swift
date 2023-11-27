@@ -37,6 +37,7 @@ final public class XCDebugger: ObservableObject {
             settings = existing
         }  else {
             do {
+                // Remove this
                 let url = try URL.debugFolderLocation()
                     .add(Settings.fileName)
                 guard url.exists() else {
@@ -66,12 +67,7 @@ final public class XCDebugger: ObservableObject {
         }
         monitoring = true
 
-        let url = try URL.appStatusFileLocation()
-        if !url.exists() {
-            let data = try status.data()
-            try data.write(to: url)
-            startMonitoring(customUrl: url)
-        }
+        try startMonitoringSettings()
         try AppInfo.markBuildTime()
     }
 
@@ -81,6 +77,7 @@ final public class XCDebugger: ObservableObject {
     {
         let url = try URL.debugFolderLocation()
             .add(Settings.fileName)
+        let settings: Settings
         if url.exists() {
             let comparisonData = try Settings().selfDescribingData()
             guard
@@ -130,12 +127,14 @@ final public class XCDebugger: ObservableObject {
                 withJSONObject: jsonDict,
                 options: [.sortedKeys, .prettyPrinted]
             )
-            let settings = try Settings().fromSelfDescribingData(data)
+            settings = try Settings().fromSelfDescribingData(data)
             try data.write(to: url)
         } else {
-            let data = try Settings().selfDescribingData()
+            settings = Settings()
+            let data = try settings.selfDescribingData()
             try data.write(to: url)
         }
+        customSettings[Settings.key] = settings
         startMonitoring(customUrl: url)
         return self
     }
@@ -172,6 +171,36 @@ final public class XCDebugger: ObservableObject {
         .eraseToAnyCancellable()
         .store(in: &bag)
         customUrlWatchers.append(watcher)
+    }
+
+    private func startMonitoringSettings() throws {
+        let url = try URL.appStatusFileLocation()
+        if !url.exists() {
+            let data = try status.data()
+            try data.write(to: url)
+            startMonitoring(customUrl: url)
+        }
+        let watcher = URLWatcher(url: url, delay: 1)
+        Task { [weak self] in
+            guard let self = self else {
+                return
+            }
+            do {
+                for try await data in watcher {
+                    self.status = try self.status.updated(with: data)
+                    self.onChange?()
+                    Task { @MainActor in
+                        self.hasChanged.send()
+                        self.objectWillChange.send()
+                    }
+                }
+            } catch {
+                log(error)
+            }
+        }
+        .eraseToAnyCancellable()
+        .store(in: &bag)
+        statusUrlWatcher = watcher
     }
 
     private func log(_ error: Error) {

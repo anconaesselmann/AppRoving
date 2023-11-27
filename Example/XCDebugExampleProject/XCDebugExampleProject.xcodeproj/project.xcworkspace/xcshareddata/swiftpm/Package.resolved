@@ -12,10 +12,10 @@
     {
       "identity" : "xcodedebug",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/anconaesselmann/XcodeDebug/",
+      "location" : "https://github.com/anconaesselmann/XcodeDebug",
       "state" : {
-        "revision" : "49567754a6b641ed489bf859ed580ed666667459",
-        "version" : "0.3.8"
+        "revision" : "ef55fd6bc04e80c4ab8910185d042e587a3e9bf6",
+        "version" : "0.3.10"
       }
     }
   ],

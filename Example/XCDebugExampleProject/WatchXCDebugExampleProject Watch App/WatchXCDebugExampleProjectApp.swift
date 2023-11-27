@@ -26,11 +26,16 @@ struct WatchXCDebugExampleProject_Watch_AppApp: App {
     init() {
 #if DEBUG
         do {
-            try XCDebugger.start {
+            try XCDebugger
+                .register(LoginDebug.self)
+                .register(GeneralDebug.self)
+                .start()
+                .onChange {
 
-            } onLog: {
-                print($0)
-            }
+                }
+                .onLog {
+                    print($0)
+                }
         } catch {
             assertionFailure(error.localizedDescription)
         }
