@@ -4,19 +4,44 @@
 import Foundation
 import Combine
 
+
 public extension XCDebugger {
-    static func start(_ onChange: (() -> Void)? = nil, onLog: (((Result<String, Error>)) -> Void)? = nil) throws {
-        shared.onLog = onLog
+
+    @discardableResult
+    func start() throws -> Self {
         onChange?()
-        try shared.startMonitoring()
-        shared.onChange = onChange
+        try startMonitoring()
+        self.onChange = onChange
+        return self
     }
 
-    static func stop() {
+    @discardableResult
+    func onChange(_ onChange: @escaping () -> Void) -> Self {
+        self.onChange = onChange
+        onChange()
+        return self
+    }
+
+    @discardableResult
+    func onLog(onLog: @escaping (Result<String, Error>) -> Void) -> Self {
+        self.onLog = onLog
+        return self
+    }
+
+    static func register<Settings>(_ type: Settings.Type) throws -> XCDebugger
+        where Settings: DebugSettings
+    {
+        try shared.register(type)
+    }
+
+    @discardableResult
+    static func stop() -> XCDebugger {
         shared.stopMonitoring()
+        return shared
     }
 
     @MainActor
+    @discardableResult
     static func get<Settings>(_ keyPath: KeyPath<Settings, Bool>) -> Bool
         where Settings: DebugSettings
     {

@@ -5,4 +5,6 @@ import Foundation
 
 public struct XCDebugConstants {
     public static let jsonFileExtensions = ".json"
+
+    public static let version: String = "1.0"
 }

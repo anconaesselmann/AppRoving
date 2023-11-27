@@ -4,6 +4,10 @@
 import Foundation
 
 internal extension Bundle {
+    var appName: String {
+        bundleIdentifier?.components(separatedBy: ".").last ?? ""
+    }
+    
     var displayName: String? {
         object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ??
         object(forInfoDictionaryKey: "CFBundleName") as? String

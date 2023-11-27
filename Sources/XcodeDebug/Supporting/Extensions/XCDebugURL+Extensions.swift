@@ -14,10 +14,6 @@ extension URL {
         }
         return nil
     }
-}
-
-extension URL {
-
 
     static func simulatorFolderLocation() throws -> URL? {
         try URL.appLibraryDirectory().truncate {
@@ -128,10 +124,4 @@ public struct DefaultCoders {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
-}
-
-extension Bundle {
-    var appName: String {
-        bundleIdentifier?.components(separatedBy: ".").last ?? ""
-    }
 }

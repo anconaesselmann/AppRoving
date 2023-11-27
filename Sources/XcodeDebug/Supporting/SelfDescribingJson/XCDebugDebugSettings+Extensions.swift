@@ -5,6 +5,7 @@ import Foundation
 
 public enum DebugSettingsError: Swift.Error {
     case invalidData
+    case unregisteredFile
 }
 
 public extension DebugSettings {
