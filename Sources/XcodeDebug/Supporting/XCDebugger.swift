@@ -8,13 +8,10 @@ final public class XCDebugger: ObservableObject {
 
     public static let shared = XCDebugger()
 
-    public var onChange: (() -> Void)?
-    public var onLog: ((Result<String, Error>) -> Void)?
+    internal var onChange: (() -> Void)?
+    internal var onLog: ((Result<String, Error>) -> Void)?
 
-    public var hasChanged = PassthroughSubject<Void, Never>()
-
-    private var customUrlWatchers: [URLWatcher] = []
-    private var statusUrlWatcher: URLWatcher?
+    private var urlWatchers: [URLWatcher] = []
 
     private var customSettings: [String: any DebugSettings] = [:]
 
@@ -32,107 +29,40 @@ final public class XCDebugger: ObservableObject {
         guard monitoring else {
             return nil
         }
-        var settings: Settings
-        if let existing = customSettings[Settings.key] as? Settings {
-            settings = existing
-        }  else {
-            do {
-                // Remove this
-                let url = try URL.debugFolderLocation()
-                    .add(Settings.fileName)
-                guard url.exists() else {
-                    log(DebugSettingsError.unregisteredFile)
-                    assertionFailure()
-                    return nil
-                }
-                let data = try Data(contentsOf: url, options: .mappedIfSafe)
-                settings = try Settings().fromSelfDescribingData(data)
-                customSettings[Settings.key] = settings
-            } catch {
-                log(error)
-                settings = Settings()
-            }
-        }
         guard status.isEnabled(Settings.key) else {
+            return nil
+        }
+        guard let settings = customSettings[Settings.key] as? Settings else {
+            assertionFailure()
             return nil
         }
         return settings[keyPath: keyPath]
     }
 
     internal func startMonitoring() throws {
-        try AppInfo.saveAppIcon()
-        let appInitializationStatusFileLocation = try URL.appInitializationStatusFileLocation()
-        if !appInitializationStatusFileLocation.exists() {
+        let appInitFilePath = try URL.appInitFilePath()
+        if !appInitFilePath.exists() {
             try XCDebugSetupInstructions.notify()
         }
-        monitoring = true
-
-        try startMonitoringSettings()
+        try AppInfo.saveAppIcon()
         try AppInfo.markBuildTime()
+
+        try startMonitoringAppStatus()
+
+        monitoring = true
     }
 
     @discardableResult
     public func register<Settings>(_ type: Settings.Type) throws -> Self
         where Settings: DebugSettings
     {
+        let settings = Settings()
         let url = try URL.debugFolderLocation()
             .add(Settings.fileName)
-        let settings: Settings
         if url.exists() {
-            let comparisonData = try Settings().selfDescribingData()
-            guard
-                let jsonDict = try JSONSerialization.jsonObject(with: comparisonData) as? SelfDescribingJson.JSON,
-                let comparisonProperties: SelfDescribingJson.JSON = jsonDict[.properties]
-            else {
-                throw DebugSettingsError.invalidData
-            }
-            let comparisonKeys = Set(comparisonProperties.keys)
-            let existingData = try Data(contentsOf: url, options: .mappedIfSafe)
-            guard
-                var jsonDict = try JSONSerialization.jsonObject(with: existingData) as? SelfDescribingJson.JSON,
-                var properties: SelfDescribingJson.JSON = jsonDict[.properties]
-            else {
-                throw DebugSettingsError.invalidData
-            }
-            let keys = Set(properties.keys)
-
-            let missingKeys = comparisonKeys.subtracting(keys)
-            let obsoleteKeys = keys.subtracting(comparisonKeys)
-            if !(missingKeys.isEmpty && obsoleteKeys.isEmpty) {
-                for missingKey in missingKeys {
-                    properties[missingKey] = comparisonProperties[missingKey]
-                }
-                for obsoleteKey in obsoleteKeys {
-                    properties.removeValue(forKey: obsoleteKey)
-                }
-            }
-            for key in keys {
-                if
-                    var value = properties[key] as? SelfDescribingJson.JSON,
-                    let comparisonValue = comparisonProperties[key] as? SelfDescribingJson.JSON,
-                    let type = value["type"] as? String,
-                    let comparisonType = comparisonValue["type"] as? String,
-                    type == comparisonType,
-                    let nullable = value["nullable"] as? Bool,
-                    let comparisonNullable = comparisonValue["nullable"] as? Bool,
-                    nullable == comparisonNullable
-                {
-                    continue
-                } else {
-                    properties[key] = comparisonProperties[key]
-                }
-            }
-            jsonDict[.properties] = properties
-            let data = try JSONSerialization.data(
-                withJSONObject: jsonDict,
-                options: [.sortedKeys, .prettyPrinted]
-            )
-            settings = try Settings().fromSelfDescribingData(data)
-            try data.write(to: url)
+            try settings.updateFile(at: url)
         } else {
-            settings = Settings()
-            let data = try settings.selfDescribingData()
-            try data.write(to: url)
+            try settings.writeToFile(at: url)
         }
         customSettings[Settings.key] = settings
         startMonitoring(customUrl: url)
@@ -142,65 +72,53 @@ final public class XCDebugger: ObservableObject {
     public func stopMonitoring() {
         monitoring = false
         bag = Set()
-        customUrlWatchers = []
-        statusUrlWatcher = nil
+        urlWatchers = []
     }
 
-    internal func startMonitoring(customUrl url: URL) {
+    private func startMonitoring(customUrl url: URL) {
         let watcher = URLWatcher(url: url, delay: 1)
-        Task { [weak self] in
-            guard let self = self else {
-                return
-            }
-            do {
-                let key = url.fileName
-                for try await data in watcher {
-                    if let settings = customSettings[key] {
-                        customSettings[key] = try settings.fromSelfDescribingData(data)
-                        self.onChange?()
-                        Task { @MainActor in
-                            self.hasChanged.send()
-                            self.objectWillChange.send()
-                        }
-                    }
-                }
-            } catch {
-                log(error)
-            }
-        }
-        .eraseToAnyCancellable()
-        .store(in: &bag)
-        customUrlWatchers.append(watcher)
+        urlWatchers.append(watcher)
+        watcher.sink { [weak self] data in
+            try self?.dataHasChanged(url: url, data: data)
+        } onError: { [weak self] error in
+            self?.log(error)
+        }.store(in: &bag)
     }
 
-    private func startMonitoringSettings() throws {
+    private func dataHasChanged(url: URL, data: Data) throws {
+        let key = url.fileName
+        guard var settings = customSettings[key] else {
+            assertionFailure()
+            return
+        }
+        customSettings[key] = try settings.updated(with: data)
+        onChange?()
+        Task { @MainActor in
+            self.objectWillChange.send()
+        }
+    }
+
+    private func startMonitoringAppStatus() throws {
         let url = try URL.appStatusFileLocation()
         if !url.exists() {
             let data = try status.data()
             try data.write(to: url)
-            startMonitoring(customUrl: url)
         }
         let watcher = URLWatcher(url: url, delay: 1)
-        Task { [weak self] in
-            guard let self = self else {
-                return
-            }
-            do {
-                for try await data in watcher {
-                    self.status = try self.status.updated(with: data)
-                    self.onChange?()
-                    Task { @MainActor in
-                        self.hasChanged.send()
-                        self.objectWillChange.send()
-                    }
-                }
-            } catch {
-                log(error)
-            }
+        urlWatchers.append(watcher)
+        watcher.sink { [weak self] data in
+            try self?.appStatusHasChanged(data: data)
+        } onError: { [weak self] error in
+            self?.log(error)
+        }.store(in: &bag)
+    }
+
+    private func appStatusHasChanged(data: Data) throws {
+        status = try status.updated(with: data)
+        onChange?()
+        Task { @MainActor in
+            self.objectWillChange.send()
         }
-        .eraseToAnyCancellable()
-        .store(in: &bag)
-        statusUrlWatcher = watcher
     }
 
     private func log(_ error: Error) {

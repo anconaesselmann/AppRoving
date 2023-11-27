@@ -41,7 +41,7 @@ extension URL {
             .add("status.json")
     }
 
-    static func appInitializationStatusFileLocation() throws -> URL {
+    static func appInitFilePath() throws -> URL {
         try xcdebugSettingsFolderLocation()
             .add("initialization_status.json")
     }

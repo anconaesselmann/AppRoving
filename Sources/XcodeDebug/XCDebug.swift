@@ -40,7 +40,6 @@ public extension XCDebugger {
         return shared
     }
 
-    @MainActor
     @discardableResult
     static func get<Settings>(_ keyPath: KeyPath<Settings, Bool>) -> Bool
         where Settings: DebugSettings
@@ -48,7 +47,6 @@ public extension XCDebugger {
         shared.get(keyPath) ?? false
     }
 
-    @MainActor
     static func get<Settings, Value>(_ keyPath: KeyPath<Settings, Value?>) -> Value?
         where Settings: DebugSettings, Value: Codable
     {
@@ -59,7 +57,6 @@ public extension XCDebugger {
         }
     }
 
-    @MainActor
     static func get<Settings, Value>(_ keyPath: KeyPath<Settings, Value>) -> Value?
         where Settings: DebugSettings, Value: Codable
     {

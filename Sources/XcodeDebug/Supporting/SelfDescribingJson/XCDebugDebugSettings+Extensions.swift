@@ -5,7 +5,6 @@ import Foundation
 
 public enum DebugSettingsError: Swift.Error {
     case invalidData
-    case unregisteredFile
 }
 
 public extension DebugSettings {
@@ -17,13 +16,74 @@ public extension DebugSettings {
         Self.name.camelCased
     }
 
-    func fromSelfDescribingData(_ data: Data) throws -> Self {
-        try SelfDescribingJson(data)
+    init(_ data: Data) throws {
+        self = try SelfDescribingJson(data)
             .properties(as: Self.self)
+    }
+
+    func updated(with data: Data) throws -> Self {
+        try Self(data)
     }
 
     func selfDescribingData() throws -> Data {
         try SelfDescribingJson(self)
             .data()
+    }
+
+    func writeToFile(at url: URL) throws {
+        let data = try selfDescribingData()
+        try data.write(to: url)
+    }
+
+    func updateFile(at url: URL) throws {
+        let comparisonData = try Self().selfDescribingData()
+        guard
+            let jsonDict = try JSONSerialization.jsonObject(with: comparisonData) as? SelfDescribingJson.JSON,
+            let comparisonProperties: SelfDescribingJson.JSON = jsonDict[.properties]
+        else {
+            throw DebugSettingsError.invalidData
+        }
+        let comparisonKeys = Set(comparisonProperties.keys)
+        let existingData = try Data(contentsOf: url, options: .mappedIfSafe)
+        guard
+            var jsonDict = try JSONSerialization.jsonObject(with: existingData) as? SelfDescribingJson.JSON,
+            var properties: SelfDescribingJson.JSON = jsonDict[.properties]
+        else {
+            throw DebugSettingsError.invalidData
+        }
+        let keys = Set(properties.keys)
+
+        let missingKeys = comparisonKeys.subtracting(keys)
+        let obsoleteKeys = keys.subtracting(comparisonKeys)
+        if !(missingKeys.isEmpty && obsoleteKeys.isEmpty) {
+            for missingKey in missingKeys {
+                properties[missingKey] = comparisonProperties[missingKey]
+            }
+            for obsoleteKey in obsoleteKeys {
+                properties.removeValue(forKey: obsoleteKey)
+            }
+        }
+        for key in keys {
+            if
+                var value = properties[key] as? SelfDescribingJson.JSON,
+                let comparisonValue = comparisonProperties[key] as? SelfDescribingJson.JSON,
+                let type = value["type"] as? String,
+                let comparisonType = comparisonValue["type"] as? String,
+                type == comparisonType,
+                let nullable = value["nullable"] as? Bool,
+                let comparisonNullable = comparisonValue["nullable"] as? Bool,
+                nullable == comparisonNullable
+            {
+                continue
+            } else {
+                properties[key] = comparisonProperties[key]
+            }
+        }
+        jsonDict[.properties] = properties
+        let data = try JSONSerialization.data(
+            withJSONObject: jsonDict,
+            options: [.sortedKeys, .prettyPrinted]
+        )
+        try data.write(to: url)
     }
 }
