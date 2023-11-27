@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/anconaesselmann/XcodeDebug/",
       "state" : {
-        "revision" : "73329680c2bbe008b05fe34d9d62041d37175139",
-        "version" : "0.3.11"
+        "revision" : "db568400675a87cbaed1c97e54b45b9af8bfd6cb",
+        "version" : "0.3.12"
       }
     }
   ],

@@ -30,6 +30,7 @@
 		975431872B0D6244002376F3 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 975431862B0D6244002376F3 /* XcodeDebug */; };
 		975431932B0EBB74002376F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 975431922B0EBB74002376F3 /* Assets.xcassets */; };
 		977891162B148425002BC33C /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 977891152B148425002BC33C /* XcodeDebug */; };
+		977891182B1519CE002BC33C /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 977891172B1519CE002BC33C /* XcodeDebug */; };
 		97CB6E022B055B7C00DD2602 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6E012B055B7C00DD2602 /* XcodeDebug */; };
 		97CB6E082B056DF500DD2602 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6E072B056DF500DD2602 /* XcodeDebug */; };
 		97CB6E162B057D8700DD2602 /* XcodeDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6E152B057D8700DD2602 /* XcodeDebug */; };
@@ -128,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				977891182B1519CE002BC33C /* XcodeDebug in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +307,7 @@
 			);
 			name = "WatchXCDebugExampleProject Watch App";
 			packageProductDependencies = (
+				977891172B1519CE002BC33C /* XcodeDebug */,
 			);
 			productName = "WatchXCDebugExampleProject Watch App";
 			productReference = 97CB6EB72B0AD9B000DD2602 /* xcDebugger Example App.app */;
@@ -814,6 +817,10 @@
 		977891152B148425002BC33C /* XcodeDebug */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 977891142B148424002BC33C /* XCRemoteSwiftPackageReference "XcodeDebug" */;
+			productName = XcodeDebug;
+		};
+		977891172B1519CE002BC33C /* XcodeDebug */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = XcodeDebug;
 		};
 		97CB6E012B055B7C00DD2602 /* XcodeDebug */ = {
