@@ -14,32 +14,32 @@ struct ContentView: View {
     var navManager = NavManager.shared
 
     var body: some View {
-//        NavigationStack(path: $navManager.path) {
+        NavigationStack(path: $navManager.path) {
             VStack {
-//                GroupBox {
+                GroupBox {
                     Text("Hello, world!")
                         .font(.headline)
                     if XCDebug.get(\GeneralDebug.enableFootnote) {
                         Text("Footnonte")
                             .font(.footnote)
                     }
-//                } label: {
-//                    Text("General")
-//                }
-//                GroupBox {
+                } label: {
+                    Text("General")
+                }
+                GroupBox {
                     LoginView()
-//                } label: {
-//                    Text("Login")
-//                }
+                } label: {
+                    Text("Login")
+                }
                 Spacer()
             }
             .padding()
-//            .navigationDestination(for: Screen.self) { screen in
-//                switch screen {
-//                case .loggedIn: Text("Logged in")
-//                case .userDetail: Text("User detail")
-//                }
-//            }
-//        }
+            .navigationDestination(for: Screen.self) { screen in
+                switch screen {
+                case .loggedIn: Text("Logged in")
+                case .userDetail: Text("User detail")
+                }
+            }
+        }
     }
 }
