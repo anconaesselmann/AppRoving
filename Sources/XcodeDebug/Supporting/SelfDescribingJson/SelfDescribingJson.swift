@@ -46,8 +46,18 @@ public struct SelfDescribingJson {
 
     public func data() throws -> Data {
         var dict = JSON()
-        dict[.properties] = properties.reduce(into: JSON()) {
-            $0[$1.key] = Self.mapValue($1.value)
+        dict[.properties] = try properties.reduce(into: JSON()) {
+            do {
+                let jsonValue = try JsonValue($1.value)
+                guard var dict = $1.value as? [String: Any] else {
+                    assertionFailure()
+                    return
+                }
+                dict["value"] = jsonValue.encodableValue ?? NSNull()
+                $0[$1.key] = dict
+            } catch {
+                print(error)
+            }
         }
         dict[.name] = name
         dict[.key]  = key
@@ -62,23 +72,37 @@ public struct SelfDescribingJson {
         return try DefaultCoders.decoder.decode(T.self, from: data)
     }
 
-    public subscript<Value>(key: String) -> Value? {
+    public subscript(key: String) -> JsonValue? {
         get {
-            guard var value = properties[key] as? [String: Any] else {
+            guard var dict = properties[key] as? [String: Any] else {
                 return nil
             }
-            return Self.unMapValue(value[.value])
+            do {
+                return try JsonValue(dict)
+            } catch {
+                print(error)
+                assertionFailure()
+                return nil
+            }
         }
         set {
-            guard var value = properties[key] as? [String: Any] else {
+            guard var existingDict = properties[key] as? [String: Any] else {
+                assertionFailure()
                 return
             }
-            if let updated = newValue {
-                value[.value] = updated
-            } else {
-                value[.value] = NSNull()
+            do {
+                guard let newValue = newValue else {
+                    existingDict["value"] = NSNull()
+                    return
+                }
+                var jsonValue = try JsonValue(existingDict)
+                try jsonValue.update(newValue.actualValue)
+                existingDict["value"] = jsonValue.encodableValue ?? NSNull()
+                properties[key] = existingDict
+            } catch {
+//                assertionFailure()
+                print(error)
             }
-            properties[key] = value
         }
     }
 
@@ -88,45 +112,5 @@ public struct SelfDescribingJson {
         }
         value[.value] = NSNull()
         properties[key] = value
-    }
-
-    private static func mapValue(_ any: Any) -> Any {
-        guard
-            var dict = any as? JSON,
-            let value = dict[.value]
-        else {
-            return any
-        }
-        switch value {
-        case let date as Date:
-            guard
-                let data = try? JSONEncoder().encode(date),
-                let string = String(data: data, encoding: .utf8),
-                let double = Double(string)
-            else {
-                return any
-            }
-            dict[.value] = double
-        default: ()
-        }
-        return dict
-    }
-
-    private static func unMapValue<T>(_ any: Any?) -> T? {
-        switch T.self {
-        case is Date.Type:
-            guard 
-                let double = any as? Double,
-                let data = "\(double)".data(using: .utf8),
-                let date = try? JSONDecoder().decode(Date.self, from: data)
-            else {
-                // TODO: Decide if when decoding I map based on type string to avoid having
-                // either the mapped or unmapped based on edit
-                return any as? T
-            }
-            return date as? T
-        default:
-            return any as? T
-        }
     }
 }
