@@ -203,46 +203,46 @@ public enum JsonValue {
         }
     }
 
-    public var stringValue: String {
+    public var stringValue: String? {
         switch self {
         case .bool(let bool):
             return bool ? "true" : "false"
         case .optionalBool(let bool):
             guard let bool = bool else {
-                return "nil"
+                return nil
             }
             return bool ? "true" : "false"
         case .int(let int):
             return "\(int)"
         case .optionalInt(let int):
             guard let int = int else {
-                return "nil"
+                return nil
             }
             return "\(int)"
         case .optionalDouble(let double):
             guard let double = double else {
-                return "nil"
+                return nil
             }
-            return "\(double)"
+            return double.removeTrailingZeros()
         case .double(let double):
-            return "\(double)"
+            return double.removeTrailingZeros()
         case .optionalString(let string):
             guard let string = string else {
-                return "nil"
+                return nil
             }
             return string
         case .string(let string):
             return string
         case .optionalDate(let date):
             guard let date = date else {
-                return "nil"
+                return nil
             }
             return date.formatted()
         case .date(let date):
             return date.formatted()
         case .optionalEnum(let stringValue):
             guard let stringValue = stringValue else {
-                return "nil"
+                return nil
             }
             return stringValue
         case .enum(let stringValue):
@@ -368,3 +368,10 @@ private extension Date {
         self = date
     }
 }
+
+extension Double {
+    func removeTrailingZeros() -> String {
+        String(format: "%g", self)
+    }
+}
+
