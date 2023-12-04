@@ -113,4 +113,9 @@ public struct SelfDescribingJson {
         value[.value] = NSNull()
         properties[key] = value
     }
+
+    public func write(to url: URL) throws {
+        let data = try data()
+        try data.write(to: url)
+    }
 }
