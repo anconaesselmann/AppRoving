@@ -47,17 +47,13 @@ public struct SelfDescribingJson {
     public func data() throws -> Data {
         var dict = JSON()
         dict[.properties] = try properties.reduce(into: JSON()) {
-            do {
-                let jsonValue = try JsonValue($1.value)
-                guard var dict = $1.value as? [String: Any] else {
-                    assertionFailure()
-                    return
-                }
-                dict["value"] = jsonValue.encodableValue ?? NSNull()
-                $0[$1.key] = dict
-            } catch {
-                print(error)
+            let jsonValue = try JsonValue($1.value)
+            guard var dict = $1.value as? [String: Any] else {
+                assertionFailure()
+                return
             }
+            dict["value"] = jsonValue.encodableValue ?? NSNull()
+            $0[$1.key] = dict
         }
         dict[.name] = name
         dict[.key]  = key
