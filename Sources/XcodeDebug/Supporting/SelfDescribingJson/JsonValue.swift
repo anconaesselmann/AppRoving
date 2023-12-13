@@ -273,48 +273,51 @@ public enum JsonValue {
         switch (self, newValue) {
         case (.optionalBool, let bool as Bool):
             self = .optionalBool(bool)
-        case (.optionalBool, nil):
-            self = .optionalBool(nil)
         case (.bool, let bool as Bool):
             self = .bool(bool)
 
         case (.optionalInt, let int as Int):
             self = .optionalInt(int)
-        case (.optionalInt, nil):
-            self = .optionalInt(nil)
         case (.int, let int as Int):
             self = .int(int)
 
         case (.optionalDouble, let double as Double):
             self = .optionalDouble(double)
-        case (.optionalDouble, nil):
-            self = .optionalDouble(nil)
         case (.double, let double as Double):
             self = .double(double)
 
         case (.optionalString, let string as String):
             self = .optionalString(string)
-        case (.optionalString, nil):
-            self = .optionalString(nil)
         case (.string, let string as String):
             self = .string(string)
 
         case (.optionalDate, let date as Date):
             self = .optionalDate(date)
-        case (.optionalDate, nil):
-            self = .optionalDate(nil)
         case (.date, let date as Date):
             self = .date(date)
 
         case (.optionalEnum, let rawValue as String):
             self = .optionalEnum(rawValue)
-        case (.optionalEnum, nil):
-            self = .optionalEnum(nil)
         case (.enum, let rawValue as String):
             self = .enum(rawValue)
 
         default:
-            throw Error.invalidType
+            switch self {
+            case .optionalBool:
+                self = .optionalBool(nil)
+            case .optionalInt:
+                self = .optionalInt(nil)
+            case .optionalDouble:
+                self = .optionalDouble(nil)
+            case .optionalString:
+                self = .optionalString(nil)
+            case .optionalDate:
+                self = .optionalDate(nil)
+            case .optionalEnum:
+                self = .optionalEnum(nil)
+            default:
+                throw Error.invalidType
+            }
         }
     }
 
