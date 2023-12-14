@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,6 +24,8 @@
 		974CB6FA2B01A3730006D359 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CB6F92B01A3730006D359 /* LoginViewModel.swift */; };
 		975431932B0EBB74002376F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 975431922B0EBB74002376F3 /* Assets.xcassets */; };
 		976BE6A62B2A825100650C15 /* AppRoving in Frameworks */ = {isa = PBXBuildFile; productRef = 976BE6A52B2A825100650C15 /* AppRoving */; };
+		976BE6A92B2A835600650C15 /* AppRoving in Frameworks */ = {isa = PBXBuildFile; productRef = 976BE6A82B2A835600650C15 /* AppRoving */; };
+		976BE6AB2B2A836000650C15 /* AppRoving in Frameworks */ = {isa = PBXBuildFile; productRef = 976BE6AA2B2A836000650C15 /* AppRoving */; };
 		97CB6EAC2B0AD69D00DD2602 /* EventTriggeredButton in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6EAB2B0AD69D00DD2602 /* EventTriggeredButton */; };
 		97CB6EAF2B0AD96300DD2602 /* EventTriggeredButton in Frameworks */ = {isa = PBXBuildFile; productRef = 97CB6EAE2B0AD96300DD2602 /* EventTriggeredButton */; };
 		97CB6EB82B0AD9B000DD2602 /* xcDebugger Example App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 97CB6EB72B0AD9B000DD2602 /* xcDebugger Example App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -95,6 +97,7 @@
 				976BE6A62B2A825100650C15 /* AppRoving in Frameworks */,
 				97CB6EAF2B0AD96300DD2602 /* EventTriggeredButton in Frameworks */,
 				97107D102B035B50001CEDD2 /* EventTriggeredButton in Frameworks */,
+				976BE6AB2B2A836000650C15 /* AppRoving in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				976BE6A92B2A835600650C15 /* AppRoving in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +234,7 @@
 				97CB6EAB2B0AD69D00DD2602 /* EventTriggeredButton */,
 				97CB6EAE2B0AD96300DD2602 /* EventTriggeredButton */,
 				976BE6A52B2A825100650C15 /* AppRoving */,
+				976BE6AA2B2A836000650C15 /* AppRoving */,
 			);
 			productName = XCDebugExampleProject;
 			productReference = 974CB6AF2B004E070006D359 /* XCDebugExampleProject.app */;
@@ -266,6 +271,7 @@
 			);
 			name = "WatchXCDebugExampleProject Watch App";
 			packageProductDependencies = (
+				976BE6A82B2A835600650C15 /* AppRoving */,
 			);
 			productName = "WatchXCDebugExampleProject Watch App";
 			productReference = 97CB6EB72B0AD9B000DD2602 /* xcDebugger Example App.app */;
@@ -303,7 +309,7 @@
 			mainGroup = 974CB6A62B004E070006D359;
 			packageReferences = (
 				97CB6EAD2B0AD96200DD2602 /* XCRemoteSwiftPackageReference "EventTriggeredButton" */,
-				976BE6A42B2A825100650C15 /* XCLocalSwiftPackageReference "../.." */,
+				976BE6A72B2A835600650C15 /* XCRemoteSwiftPackageReference "AppRoving" */,
 			);
 			productRefGroup = 974CB6B02B004E070006D359 /* Products */;
 			projectDirPath = "";
@@ -714,14 +720,15 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		976BE6A42B2A825100650C15 /* XCLocalSwiftPackageReference "../.." */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../..;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
+		976BE6A72B2A835600650C15 /* XCRemoteSwiftPackageReference "AppRoving" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/anconaesselmann/AppRoving";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.21;
+			};
+		};
 		97CB6EAD2B0AD96200DD2602 /* XCRemoteSwiftPackageReference "EventTriggeredButton" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/anconaesselmann/EventTriggeredButton";
@@ -751,6 +758,16 @@
 		};
 		976BE6A52B2A825100650C15 /* AppRoving */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = AppRoving;
+		};
+		976BE6A82B2A835600650C15 /* AppRoving */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 976BE6A72B2A835600650C15 /* XCRemoteSwiftPackageReference "AppRoving" */;
+			productName = AppRoving;
+		};
+		976BE6AA2B2A836000650C15 /* AppRoving */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 976BE6A72B2A835600650C15 /* XCRemoteSwiftPackageReference "AppRoving" */;
 			productName = AppRoving;
 		};
 		97CB6EAB2B0AD69D00DD2602 /* EventTriggeredButton */ = {

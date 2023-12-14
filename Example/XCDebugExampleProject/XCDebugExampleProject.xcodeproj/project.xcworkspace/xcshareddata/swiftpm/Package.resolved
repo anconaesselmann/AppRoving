@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "approving",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/anconaesselmann/AppRoving",
+      "state" : {
+        "revision" : "9abf1a42168fe44999db6a262f6f0c17a17aa3f3",
+        "version" : "0.3.21"
+      }
+    },
+    {
       "identity" : "eventtriggeredbutton",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/anconaesselmann/EventTriggeredButton",
