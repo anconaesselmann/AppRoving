@@ -1,6 +1,6 @@
-# XcodeDebug
+# AppRoving
 
-XcodeDebug is the companion package to XcodeDebugger
+AppRoving is the companion package to AppRover
 
 ## Author
 
@@ -8,4 +8,4 @@ Axel Ancona Esselmann, axel@anconaesselmann.com
 
 ## License
 
-The use of XcodeDebug requires a valid license for XcodeDebugger. See the LICENSE file for more info.
+The use of AppRoving requires a valid license for AppRover. See the LICENSE file for more info.

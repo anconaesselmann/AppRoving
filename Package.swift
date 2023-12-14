@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "XcodeDebug",
+    name: "AppRoving",
     platforms: [
         .macOS(.v12),
         .iOS(.v14),
@@ -13,12 +13,12 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "XcodeDebug",
-            targets: ["XcodeDebug"]),
+            name: "AppRoving",
+            targets: ["AppRoving"]),
     ],
     targets: [
         .target(
-            name: "XcodeDebug"
+            name: "AppRoving"
         ),
     ]
 )
