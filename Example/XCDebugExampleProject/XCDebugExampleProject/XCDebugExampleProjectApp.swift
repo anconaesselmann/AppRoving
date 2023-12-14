@@ -7,9 +7,9 @@ import EventTriggeredButton
 typealias Button = EventTriggeredButton.ETButton
 
 #if DEBUG
-import XcodeDebug
-typealias XCDebug = XcodeDebug.XCDebugger
-typealias XCDebugObserver = XcodeDebug.XCDebugObserver
+import AppRoving
+typealias XCDebug = AppRoving.XCDebugger
+typealias XCDebugObserver = AppRoving.XCDebugObserver
 #else
 import Combine
 struct XCDebug {
