@@ -19,15 +19,15 @@ struct XCDebugSetupInstructions {
 
 
 
-‼️ XcodeDebug alert:
-    Mac application has to be registered with Xcode Debugger.
+‼️ AppRoving alert:
+    Mac application has to be registered with AppRover.
 
-Import-URL for Xcode Debugger:
+Import-URL for AppRover:
     \(appUrl.backport.path(percentEncoded: false))
 
 
 Note:
-    To paste this URL in Xcode Debugger
+    To paste this URL in AppRover
     open the recource import dialogue (command + i),
     bring up the \"Go to:\" dialogue (command + shift + g)
     and paste the URL (command + v)
@@ -35,7 +35,7 @@ Note:
 Note:
     If you already registered this simulator and this is
     the first time you are building your project after
-    setting up XCDebug open or foreground Xcode Debugger
+    setting up AppRoving open or foreground AppRover
     and re-build your project.
 
 """
@@ -51,15 +51,15 @@ Note:
 
 
 
-‼️ XcodeDebug alert:
-    Simulator has to be registered with Xcode Debugger.
+‼️ AppRoving alert:
+    Simulator has to be registered with AppRover.
 
-Import-URL for Xcode Debugger:
+Import-URL for AppRover:
     \(simulatorUrl.backport.path(percentEncoded: false))
 
 
 Note:
-    To paste this URL in Xcode Debugger
+    To paste this URL in AppRover
     open the recource import dialogue (command + i),
     bring up the \"Go to:\" dialogue (command + shift + g)
     and paste the URL (command + v)
@@ -67,7 +67,7 @@ Note:
 Note:
     If you already registered this simulator and this is
     the first time you are building your project after
-    setting up XCDebug open or foreground Xcode Debugger
+    setting up AppRoving open or foreground AppRover
     and re-build your project.
 
 """
