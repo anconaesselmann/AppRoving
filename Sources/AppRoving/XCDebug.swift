@@ -71,3 +71,62 @@ public extension XCDebugger {
         shared.objectWillChange.sink(receiveValue: onChange)
     }
 }
+
+public func update<Object: AnyObject, Settings: DebugSettings>(
+    _ object: Object,
+    using type: Settings.Type
+) -> ARSubscription<Object, Settings> {
+    ARSubscription(settingsType: type, object: object, bag: [])
+}
+
+public struct ARSubscription<Object: AnyObject, Settings: DebugSettings> {
+    internal var settingsType: Settings.Type
+    internal var object: Object
+    internal var bag = Set<AnyCancellable>()
+    internal var updater: Updater = Updater()
+
+    internal class Updater {
+        internal var onUpdate: (() -> Void)? = nil
+
+        internal func update() {
+            onUpdate?()
+        }
+    }
+
+    public func notify<O: ObservableObjectPublisher>(_ publisher: O) -> Self {
+        updater.onUpdate = { [weak publisher] in
+            publisher?.send()
+        }
+        return self
+    }
+
+    public func bind<Value>(
+        _ settingsKeyPath: KeyPath<Settings, Value?>,
+        _ keyPath: ReferenceWritableKeyPath<Object, Value>,
+        default defaultValue: Value? = nil
+    ) -> ARSubscription
+        where Settings: DebugSettings, Value: Codable
+    {
+        let anycancellable = XCDebugger.onChange { [weak object] in
+            if let value: Value = XCDebugger.get(settingsKeyPath) {
+                object?[keyPath: keyPath] = value
+                updater.update()
+            } else if let defaultValue = defaultValue {
+                object?[keyPath: keyPath] = defaultValue
+                updater.update()
+            }
+        }
+        return ARSubscription(
+            settingsType: settingsType,
+            object: object,
+            bag: Set([anycancellable]).union(bag),
+            updater: updater
+        )
+    }
+
+    public func store(in set: inout Set<AnyCancellable>) {
+        for subscription in bag {
+            set.insert(subscription)
+        }
+    }
+}
