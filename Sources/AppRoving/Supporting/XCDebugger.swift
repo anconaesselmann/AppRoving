@@ -32,7 +32,10 @@ final public class XCDebugger: ObservableObject {
         guard status.isEnabled(Settings.key) else {
             return nil
         }
-        guard let settings = customSettings[Settings.key] as? Settings else {
+        guard let value = customSettings[Settings.key] else {
+            return nil
+        }
+        guard let settings = value as? Settings else {
             assertionFailure()
             return nil
         }
