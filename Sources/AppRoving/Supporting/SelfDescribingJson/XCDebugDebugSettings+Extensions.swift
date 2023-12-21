@@ -78,7 +78,8 @@ public extension DebugSettings {
                 type == comparisonType,
                 let nullable = value["nullable"] as? Bool,
                 let comparisonNullable = comparisonValue["nullable"] as? Bool,
-                nullable == comparisonNullable
+                nullable == comparisonNullable,
+                (value["cases"] as? [String] ?? []).joined(separator: ":") == (comparisonValue["nullable"] as? [String] ?? []).joined(separator: ":")
             {
                 continue
             } else {
