@@ -4,7 +4,6 @@
 import Foundation
 import Combine
 
-
 public extension XCDebugger {
 
     @discardableResult
@@ -63,6 +62,12 @@ public extension XCDebugger {
         shared.get(keyPath)
     }
 
+    static func getEvents<Settings, Value>(_ keyPath: KeyPath<Settings, XCDebugValue<Value>>) -> [(UUID, Value)]
+        where Settings: DebugSettings, Value: Codable, Value: XCDebugEvent
+    {
+        shared.getEvents(keyPath)
+    }
+
     static var changed: ObservableObjectPublisher {
         shared.objectWillChange
     }
@@ -100,13 +105,11 @@ public struct ARSubscription<Object: AnyObject, Settings: DebugSettings> {
         return self
     }
 
-    public func bind<Value>(
+    public func bind<Value: Codable>(
         _ settingsKeyPath: KeyPath<Settings, Value?>,
         _ keyPath: ReferenceWritableKeyPath<Object, Value>,
         default defaultValue: Value? = nil
-    ) -> ARSubscription
-        where Settings: DebugSettings, Value: Codable
-    {
+    ) -> ARSubscription {
         let anycancellable = XCDebugger.onChange { [weak object] in
             if let value: Value = XCDebugger.get(settingsKeyPath) {
                 object?[keyPath: keyPath] = value
@@ -124,9 +127,49 @@ public struct ARSubscription<Object: AnyObject, Settings: DebugSettings> {
         )
     }
 
+    public func on<Value>(
+        _ settingsKeyPath: KeyPath<Settings, XCDebugValue<Value>>,
+        call action: @escaping (Value) -> Void
+    ) -> Self 
+        where Value: XCDebugEvent
+    {
+        let anycancellable = XCDebugger.onChange {
+            let events = XCDebugger.getEvents(settingsKeyPath)
+            while let new = EventProcessor.shared.process(events) {
+                action(new)
+            }
+        }
+        return ARSubscription(
+            settingsType: settingsType,
+            object: object,
+            bag: Set([anycancellable]).union(bag),
+            updater: updater
+        )
+    }
+
     public func store(in set: inout Set<AnyCancellable>) {
         for subscription in bag {
             set.insert(subscription)
         }
+    }
+}
+
+private class EventProcessor {
+    static let shared = EventProcessor()
+
+    var uuids = Set<UUID>()
+
+    func process<V>(_ events: [(UUID, V)]) -> V? {
+        var processed = Set<UUID>()
+        for (uuid, event) in events {
+            if uuids.contains(uuid) {
+                processed.insert(uuid)
+            } else {
+                processed.insert(uuid)
+                uuids = processed
+                return event
+            }
+        }
+        return nil
     }
 }

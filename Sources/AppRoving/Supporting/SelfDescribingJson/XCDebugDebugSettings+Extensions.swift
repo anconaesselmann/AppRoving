@@ -85,6 +85,16 @@ public extension DebugSettings {
                 properties[key] = comparisonProperties[key]
             }
         }
+        for key in keys {
+            if
+                var value = properties[key] as? SelfDescribingJson.JSON,
+                let isEvent = value["event"] as? Bool,
+                isEvent
+            {
+                value["history"] = nil
+                properties[key] = value
+            }
+        }
         jsonDict[.properties] = properties
         let data = try JSONSerialization.data(
             withJSONObject: jsonDict,

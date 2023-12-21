@@ -3,6 +3,8 @@
 
 import Foundation
 
+public protocol XCDebugEvent: RawRepresentable where RawValue == String { }
+
 public extension XCDebugValue {
     init<V>(
         caption: String? = nil,
@@ -26,12 +28,17 @@ public extension XCDebugValue {
     }
 }
 
+class EventManager {
+    static let shared = EventManager()
+    var events: [AnyHashable: [String]] = [:]
+}
+
 @propertyWrapper
 public struct XCDebugValue<T>: Codable
     where T: Codable
 {
     enum CodingKeys: CodingKey {
-        case type, value, caption, description, nullable, cases
+        case type, value, caption, description, nullable, cases, event, history
     }
 
     public 
@@ -46,11 +53,14 @@ public struct XCDebugValue<T>: Codable
     private(set)
     var description: String?
 
+    internal var history: [String]?
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         wrappedValue = try container.decode(T.self, forKey: .value)
         caption = try container.decodeIfPresent(String.self, forKey: .caption)
         description = try container.decodeIfPresent(String.self, forKey: .description)
+        history = try container.decodeIfPresent([String].self, forKey: .history)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -58,6 +68,9 @@ public struct XCDebugValue<T>: Codable
         let type = try XCDebugValueType(self.wrappedValue, type: T.self)
         try container.encode(type.typeString, forKey: .type)
         try container.encode(type.nullable, forKey: .nullable)
+        if type.isEvent {
+            try container.encode(type.isEvent, forKey: .event)
+        }
         try container.encodeIfPresent(type.cases, forKey: .cases)
         if let enumValue = wrappedValue as? (any XCDebugEnum) {
             let stringValue = enumValue.stringValue
@@ -68,6 +81,8 @@ public struct XCDebugValue<T>: Codable
         try container.encodeIfPresent(caption, forKey: .caption)
         try container.encodeIfPresent(description, forKey: .description)
     }
+
+    public var projectedValue: Self { self }
 }
 
 public protocol XCDebugEnum: Codable, CaseIterable, RawRepresentable {

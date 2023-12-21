@@ -42,6 +42,42 @@ final public class XCDebugger: ObservableObject {
         return settings[keyPath: keyPath]
     }
 
+    public func getEvents<Settings, Value>(_ keyPath: KeyPath<Settings, XCDebugValue<Value>>) -> [(UUID, Value)]
+        where Settings: DebugSettings, Value: Codable, Value: XCDebugEvent
+    {
+        guard monitoring else {
+            return []
+        }
+        guard status.isEnabled(Settings.key) else {
+            return []
+        }
+        guard let value = customSettings[Settings.key] else {
+            return []
+        }
+        guard let settings = value as? Settings else {
+            assertionFailure()
+            return []
+        }
+        let debugValue = settings[keyPath: keyPath]
+        return (debugValue.history ?? [])
+            .compactMap {
+                let components = $0.split(separator: ":")
+                guard
+                    let uuidString = components.first,
+                    let uuid = UUID(uuidString: String(uuidString))
+                else {
+                    return nil
+                }
+                let string = components
+                    .dropFirst()
+                    .joined(separator: ":")
+                guard let value = Value(rawValue: string) else {
+                    return nil
+                }
+                return (uuid, value)
+            }
+    }
+
     internal func startMonitoring() throws {
         let appInitFilePath = try URL.appInitFilePath()
         if !appInitFilePath.exists() {

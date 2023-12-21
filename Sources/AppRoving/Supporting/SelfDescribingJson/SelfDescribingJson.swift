@@ -68,6 +68,49 @@ public struct SelfDescribingJson {
         return try DefaultCoders.decoder.decode(T.self, from: data)
     }
 
+    public subscript(historyForKey key: String) -> [String]? {
+        get {
+            guard var dict = properties[key] as? [String: Any] else {
+                return nil
+            }
+            return dict["history"] as? [String]
+        }
+        set {
+            guard var existingDict = properties[key] as? [String: Any] else {
+                assertionFailure()
+                return
+            }
+            guard let newElements = newValue else {
+                existingDict["history"] = nil // NSNull() // TODO: Test
+                return
+            }
+            existingDict["history"] = newElements
+            properties[key] = existingDict
+        }
+    }
+
+    public func isEvent(_ key: String) -> Bool {
+        guard var json = properties[key] as? [String: Any] else {
+            return false
+        }
+        return (json["event"] as? Bool) ?? false
+    }
+
+    public mutating func addToHistory(key: String) {
+        guard let value = self[key]?.stringValue else {
+            assertionFailure()
+            return
+        }
+        let entry = "\(UUID().uuidString.lowercased()):\(value)"
+        var existing = self[historyForKey: key] ?? []
+        let max = 4
+        if existing.count > max {
+            existing = Array(existing.dropFirst(existing.count - max))
+        }
+        existing.append(entry)
+        self[historyForKey: key] = existing
+    }
+
     public subscript(key: String) -> JsonValue? {
         get {
             guard var dict = properties[key] as? [String: Any] else {

@@ -14,13 +14,14 @@ public struct XCDebugValueType: Equatable {
 
     public let valueType: ValueType
     public let nullable: Bool
+    public let isEvent: Bool
     public let cases: [String]?
 
     var typeString: String {
         valueType.rawValue
     }
 
-    public init(type: String, nullable: Bool, cases: [String]?) throws {
+    public init(type: String, nullable: Bool, cases: [String]?, isEvent: Bool) throws {
         self.nullable = nullable
 
         guard let valueType = ValueType(rawValue: type) else {
@@ -28,6 +29,7 @@ public struct XCDebugValueType: Equatable {
         }
         self.valueType = valueType
         self.cases = cases
+        self.isEvent = isEvent
     }
 
     public init<T>(_ value: T, type: T.Type) throws
@@ -60,6 +62,11 @@ public struct XCDebugValueType: Equatable {
             }
         }
         self.cases = cases
+        if value is (any XCDebugEvent) {
+            self.isEvent = true
+        } else {
+            self.isEvent = false
+        }
     }
 }
 
