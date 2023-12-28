@@ -81,13 +81,17 @@ public func update<Object: AnyObject, Settings: DebugSettings>(
     _ object: Object,
     using type: Settings.Type
 ) -> ARSubscription<Object, Settings> {
-    ARSubscription(settingsType: type, object: object, bag: [])
+    ARSubscription(
+        settingsType: type,
+        object: object,
+        perform: []
+    )
 }
 
 public struct ARSubscription<Object: AnyObject, Settings: DebugSettings> {
     internal var settingsType: Settings.Type
-    internal var object: Object
-    internal var bag = Set<AnyCancellable>()
+    internal weak var object: Object?
+    internal var perform: [() -> Void]
     internal var updater: Updater = Updater()
 
     internal class Updater {
@@ -110,7 +114,7 @@ public struct ARSubscription<Object: AnyObject, Settings: DebugSettings> {
         _ keyPath: ReferenceWritableKeyPath<Object, Value>,
         default defaultValue: Value? = nil
     ) -> ARSubscription {
-        let anycancellable = XCDebugger.onChange { [weak object] in
+        var onChange = { [weak object] in
             if let value: Value = XCDebugger.get(settingsKeyPath) {
                 object?[keyPath: keyPath] = value
                 updater.update()
@@ -122,7 +126,7 @@ public struct ARSubscription<Object: AnyObject, Settings: DebugSettings> {
         return ARSubscription(
             settingsType: settingsType,
             object: object,
-            bag: Set([anycancellable]).union(bag),
+            perform: perform + [onChange],
             updater: updater
         )
     }
@@ -133,7 +137,8 @@ public struct ARSubscription<Object: AnyObject, Settings: DebugSettings> {
     ) -> Self 
         where Value: XCDebugEvent
     {
-        let anycancellable = XCDebugger.onChange {
+        let action = action
+        var onChange = {
             let events = XCDebugger.getEvents(settingsKeyPath)
             while let new = EventProcessor.shared.process(events) {
                 action(new)
@@ -142,15 +147,29 @@ public struct ARSubscription<Object: AnyObject, Settings: DebugSettings> {
         return ARSubscription(
             settingsType: settingsType,
             object: object,
-            bag: Set([anycancellable]).union(bag),
+            perform: perform + [onChange],
             updater: updater
         )
     }
 
-    public func store(in set: inout Set<AnyCancellable>) {
-        for subscription in bag {
-            set.insert(subscription)
+    @discardableResult
+    public func store(in set: inout Set<AnyCancellable>) -> Self {
+        let onChange = {
+            for action in perform {
+                action()
+            }
         }
+        let subscription = XCDebugger.onChange(onChange)
+        set.insert(subscription)
+        return self
+    }
+
+    @discardableResult
+    public func run() -> Self {
+        for action in perform {
+            action()
+        }
+        return self
     }
 }
 
